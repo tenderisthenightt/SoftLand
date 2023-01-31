@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>유사도 검사</title>
+</head>
+<body>
+    그림 그리기(업로드로 대체)
+</body>
+
+<form action = "http://localhost:5000//image-similarity" method = "POST"
+        enctype = "multipart/form-data">
+<input type = "file" name = "file" />
+<input type = "hidden" name = 'p_path' value = {{p_path}}>
+<input type="hidden" name = "sim" value={{sim}}>
+<input type = "submit"/>
+</form>
