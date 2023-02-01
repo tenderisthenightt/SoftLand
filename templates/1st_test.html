@@ -6,9 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=0.1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
+
         <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-32x32.png') }}" sizes="32x32" />
         <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-16x16.png') }}" sizes="16x16" />
         <title>MCI</title>
+
         <!--stylesheet-->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -25,13 +27,13 @@
         li {font-weight: bolder; list-style: none; font-size : 15px}
         span {font-weight: lighter;}
     </style>
+    
     <style>
       .controls__btns {
         display: flex;
         justify-content: center;
       }
     </style>
-
   </head>
 
 <body>
@@ -45,38 +47,10 @@
           <!--그림판-->
           <center>
           <img id="image" src={{h_path}} style="display: none;" width = 450>
-          <script>
-            document.getElementById("image").style.display = "block";
-            setTimeout(function() {
-              document.getElementById("image").style.display = "none";
-            }, 10000);
-          </script>
-          
-          <script>
-            setTimeout(function(){
-              document.getElementById("jsCanvas").style.display = "block";
-            }, 10000);
-          </script>
         </div>
         <canvas id="jsCanvas" class="canvas" style="display:none;"></canvas>
         <center>
-          <script>
-            setTimeout(function () {
-              document.getElementById("jsBrush").style.display = "flex";
-            }, 10000);
-            
-            setTimeout(function () {
-              document.getElementById("jsAllremove").style.display = "flex";
-            }, 10000);
-            
-            setTimeout(function () {
-              document.getElementById("jsSubmitButton").style.display = "flex";
-            }, 10000);
-          </script>
-            <div class="controls__btns" style="display: none;">
-              <button id="jsBrush">브러쉬</button>
-              <button id="jsAllremove">전체지우기</button>
-              <button id="jsSubmitButton">제출</button>
+          
         <div class="controls__btns" style="display: flex; justify-content: center;">
           <button id="jsBrush">브러쉬</button>
           <button id="jsAllremove">전체지우기</button>
@@ -89,7 +63,30 @@
             <input type="file" name="file" id="file">
           </center>
           <!--그림판 끝-->
-      
+          <script>
+            document.getElementById("image").style.display = "block";
+            document.getElementById("jsBrush").style.display = "none";
+            document.getElementById("jsAllremove").style.display = "none";
+            document.getElementById("jsSubmitButton").style.display = "none";
+
+            setTimeout(function() {
+              document.getElementById("image").style.display = "none";
+            }, 2000);
+            setTimeout(function(){
+              document.getElementById("jsCanvas").style.display = "block";
+            }, 2000);
+            setTimeout(function () {
+              document.getElementById("jsBrush").style.display = "none";
+            }, 2000);
+            
+            setTimeout(function () {
+              document.getElementById("jsAllremove").style.display = "flex";
+            }, 2000);
+            
+            setTimeout(function () {
+              document.getElementById("jsSubmitButton").style.display = "flex";
+            }, 2000);
+          </script>
         </div>
     <h2>
         <div>

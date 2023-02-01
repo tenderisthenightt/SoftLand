@@ -6,24 +6,21 @@ const erase = document.getElementById("jsErase");
 const submitButton = document.getElementById("jsSubmitButton");
 
 // send image
-submitButton.addEventListener("click", function () {
-    const dataURL = canvas.toDataURL();
-    const formData = new FormData();
-    formData.append("file(여기바꾸기)", dataURLToFile(dataURL, "image.png"));
-    const form = document.getElementById("form");
-    form.submit();
+submitButton.addEventListener("click", () => {
+    const dataURI = canvas.toDataURL();
+    fetch('/process-image', {
+        method: 'POST',
+        body: JSON.stringify({ image: dataURI }),
+        headers: { 'Content-Type': 'application/json' },
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 });
-
-function dataURLToFile(dataURL, fileName) {
-    const byteString = atob(dataURL.split(",")[1]);
-    const mimeString = dataURL.split(",")[0].split(":")[1].split(";")[0];
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-    return new File([ab], fileName, { type: mimeString });
-}
 
 const INITIAL_COLOR = "#2c2c2c";
 const INITIAL_LINEWIDTH = 5.0;
@@ -87,49 +84,6 @@ function handleModeChange(event) {
     }
 }
 
-function handleStart(event) {
-    // Mouse down event or touch start event
-    painting = true;
-    let x, y;
-    if (event.type === "mousedown") {
-      x = event.offsetX;
-      y = event.offsetY;
-    } else {
-      x = event.touches[0].clientX - canvas.offsetLeft;
-      y = event.touches[0].clientY - canvas.offsetTop;
-    }
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-  }
-  
-  function handleMove(event) {
-    if (!painting) return;
-    let x, y;
-    if (event.type === "mousemove") {
-      x = event.offsetX;
-      y = event.offsetY;
-    } else {
-      x = event.touches[0].clientX - canvas.offsetLeft;
-      y = event.touches[0].clientY - canvas.offsetTop;
-    }
-    ctx.lineTo(x, y);
-    ctx.stroke();
-  }
-  
-  function handleEnd(event) {
-    // Mouse up event or touch end event
-    painting = false;
-  }
-  
-  if (canvas) {
-    canvas.addEventListener("mousedown", handleStart);
-    canvas.addEventListener("mousemove", handleMove);
-    canvas.addEventListener("mouseup", handleEnd);
-    canvas.addEventListener("mouseleave", handleEnd);
-    canvas.addEventListener("touchstart", handleStart);
-    canvas.addEventListener("touchmove", handleMove);
-    canvas.addEventListener("touchend", handleEnd);
-  }
 
 // All Remove Bts
 

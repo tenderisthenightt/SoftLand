@@ -19,8 +19,8 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/styles.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/custom-responsive-styles.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/static/styles/huiyacanvars.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/huiyaborder.css') }}" type="text/css">
     
-      </head>
 
     <title>check</title>
     <style>
@@ -30,16 +30,58 @@
         span {font-weight: lighter;}
     </style>
 </head>
+
 <body>
     <br>
     <h1 align="center"> 글 -> 그림 </h1>
-    <p style="text-align:center;">토끼를 그려주세요~!
+    <p style="text-align:center;"> 🐇토끼🐇를 그려주세요
         <div style="border: px solid; padding :10px; width: 820px; 
         height: 450px ; border-radius:2em; margin:auto; 
         padding-top:50px; background-color:rgb(255, 255, 255) ">
-                       <!--모델-->
-    
-                       <!--모델-->
+        <div>
+          <!--그림판-->
+          <center>
+          <img id="image" src={{h_path}} style="display: none;" width = 450>
+        </div>
+        <canvas id="jsCanvas" class="canvas" style="display:none;"></canvas>
+        <center>
+          
+        <div class="controls__btns" style="display: flex; justify-content: center;">
+          <button id="jsBrush">브러쉬</button>
+          <button id="jsAllremove">전체지우기</button>
+          <button id="jsSubmitButton">제출</button>
+        </div>
+          <script src="{{ url_for('static', filename='js/huiyacanvars.js') }}"></script>
+          <form id="form" method="post" action="/image-similarity" enctype="multipart/form-data" style="display: none">
+            <input type="hidden" name="p_path" value={{p_path}}>
+            <input type="hidden" name="sim" value={{sim}}>
+            <input type="file" name="file" id="file">
+          </center>
+          <!--그림판 끝-->
+          <script>
+            document.getElementById("image").style.display = "block";
+            document.getElementById("jsBrush").style.display = "none";
+            document.getElementById("jsAllremove").style.display = "none";
+            document.getElementById("jsSubmitButton").style.display = "none";
+
+            setTimeout(function() {
+              document.getElementById("image").style.display = "none";
+            }, 2000);
+            setTimeout(function(){
+              document.getElementById("jsCanvas").style.display = "block";
+            }, 2000);
+            setTimeout(function () {
+              document.getElementById("jsBrush").style.display = "none";
+            }, 2000);
+            
+            setTimeout(function () {
+              document.getElementById("jsAllremove").style.display = "flex";
+            }, 2000);
+            
+            setTimeout(function () {
+              document.getElementById("jsSubmitButton").style.display = "flex";
+            }, 2000);
+          </script>
         </div>
     <h2>
         <div>

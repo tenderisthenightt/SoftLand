@@ -14,7 +14,7 @@ from anchor import *
 # 2nd test
 # 3rd test
 import pandas
-# import torch
+import torch
 import sqlite3
 
 # 4th test
@@ -76,7 +76,7 @@ def similarity_image():
 @app.route("/image-similarity", methods=["POST"])
 def image_similarity():
     f = request.files['file']
-    img_path = 'C:/Users/admin/Desktop/SoftLand/static/1/img/anchor/img.jpg'
+    img_path = 'static/1/img/anchor/img.jpg'
     f.save(img_path)
     p_path = str(request.form['p_path'])
     sim = float(request.form['sim'])
@@ -103,7 +103,7 @@ def stroop():
 def text_to_img():
     return render_template('3rd_test.html')
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/predict", methods=["GET", "POST"])
 def predict():
     # Model(YOLOv5 종속 항목 설치)
     model = torch.hub.load('ultralytics/yolov5', 'custom', path = 'best.pt', force_reload =True)
@@ -205,11 +205,13 @@ def wrong_img():
 def pygame():
     return render_template('5th_test.html')
 
+
+##################### 6번째 게임 : STT #######################
+
 @app.route('/stt')
 def stt():
     return render_template('6th_test.html')
 
-# 6st test
 
 @app.route('/get_screenshot', methods=['POST'])
 def get_screenshot():
