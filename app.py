@@ -28,7 +28,7 @@ import urllib3
 import json
 import os, pyscreenshot, random, string
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
-import easyocr
+# import easyocr
 
 # 6st test
 
@@ -161,22 +161,33 @@ def predict():
     conn.close()    
 
     
-    render_template('index.html')
+    render_template('3th_test.html')
 
+################ 4번째게임 : 틀린그림찾기 ###############
 
-@app.route('/find_diff',  methods=['POST','GET'])
+@app.route('/find_diff')
+def find_diff():
+    return render_template('4th_test.html')
+
+@app.route('/wrong_img',  methods=['POST','GET'])
 def wrong_img():
     # 랜덤으로 텍스트 보내기
-    random_class =random.sample(['나비','지렁이','컴퓨터'], 3)
+    count = 0
+    random_class = ['나비','지렁이','컴퓨터']
+    random.shuffle(random_class)
     for i in random_class :
         random_list = [i+'1', i+'2',i+'3',i+'X']
         random_list_2 = []
-        for  j in random.sample(random_list, 4):
+        random.shuffle(random_list)
+        for  j in random_list:
             random_list_2.append(j)
         img1 = random_list_2[0]
         img2 = random_list_2[1]
         img3 = random_list_2[2]
         img4 = random_list_2[3]
+        count += 1 
+        if count == len(random_class): msg = '문제가 끝났습니다. 다음으로 넘어가 주세요.'
+
     
    
     # 누른 버튼의 text 를 받아서 정답인지 오답인지 판별하기
@@ -188,7 +199,6 @@ def wrong_img():
         else: point.append('오답')
         
     return render_template('4th_test.html',img1 = img1, img2=img2, img3=img3, img4=img4)
-
 
 ################### 5번째 게임 : 파이게임(기억력) ###################
 @app.route('/pygame')
@@ -219,32 +229,32 @@ def get_screenshot():
             
         return level, score
 
-    # 기억력 게임을 완료한 이후 easyocr을 이용해 게임결과 이미지에서 텍스트추출
-    im = pyscreenshot.grab()
-    random_id = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(32)])
-    file_name = 'static/5/img/{}.png'.format(random_id)
-    im.save(file_name)
-    reader = easyocr.Reader(['ko', 'en'])
+    # # 기억력 게임을 완료한 이후 easyocr을 이용해 게임결과 이미지에서 텍스트추출
+    # im = pyscreenshot.grab()
+    # random_id = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(32)])
+    # file_name = 'static/5/img/{}.png'.format(random_id)
+    # im.save(file_name)
+    # reader = easyocr.Reader(['ko', 'en'])
     
-    with open(file_name,'rb') as pf:
-        img = pf.read()
-        result = reader.readtext(img)
-        for res in result:
-            if res[1][0:10] == 'Your level':    
-                level = res[1][-1]
-                result = get_score(int(level))
+    # with open(file_name,'rb') as pf:
+    #     img = pf.read()
+    #     result = reader.readtext(img)
+    #     for res in result:
+    #         if res[1][0:10] == 'Your level':    
+    #             level = res[1][-1]
+    #             result = get_score(int(level))
     
-    # 텍스트로 추출한 결과를 DB에 저장
-    conn = sql.connect('remember.db', isolation_level=None)
-    cur = conn.cursor()
-    cur.execute(
-        'CREATE TABLE IF NOT EXISTS remember (level TEXT, score TEXT)')
-    cur.execute("""INSERT INTO remember(level, score) 
-                    VALUES(?, ?)""", (result[0], result[1]))
-    conn.commit()
-    cur.close()
+    # # 텍스트로 추출한 결과를 DB에 저장
+    # conn = sql.connect('remember.db', isolation_level=None)
+    # cur = conn.cursor()
+    # cur.execute(
+    #     'CREATE TABLE IF NOT EXISTS remember (level TEXT, score TEXT)')
+    # cur.execute("""INSERT INTO remember(level, score) 
+    #                 VALUES(?, ?)""", (result[0], result[1]))
+    # conn.commit()
+    # cur.close()
                 
-    os.remove(file_name)
+    # os.remove(file_name)
 
 
 

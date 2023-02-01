@@ -6,8 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=0.1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" type="image/png" href="../static/images/favicon-32x32.png" sizes="32x32" />
-        <link rel="icon" type="image/png" href="../static/images/favicon-16x16.png" sizes="16x16" />
+        <link rel="icon" type="image/PNG" href="../static/images/favicon-32x32.PNG" sizes="32x32" />
+        <link rel="icon" type="image/PNG" href="../static/images/favicon-16x16.PNG" sizes="16x16" />
         <title>Travel</title>
         <!--stylesheet-->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet">
@@ -15,11 +15,6 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/styles.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/custom-responsive-styles.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/huiyacanvars.css') }}" type="text/css">
-        <!--scripts-->
-        <script src="../game/4_틀린그림찾기/4_java.js"></script>
-        <script type="text/javascript" src="../static/scripts/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="../static/scripts/all-plugins.js"></script>
-        <script type="text/javascript" src="../static/scripts/plugins-activate.js"></script>
 
     <title>check</title>
     <style>
@@ -42,7 +37,7 @@
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center">
                                 <div class="card m-3" >
-                                    <img class="card-img-top" src = "{{url_for('static', filename = '4/img/'+img1+'.PNG')}}" alt="image1" >
+                                    <img class="card-img-top" src = "{{url_for('static', filename = '4/img/'+ img1 +'.PNG')}}" alt="image1" >
                                 
                                     <div class="card-body">
                                         <button id="button" name="button" class="btn btn-primary" value= '{{img1}}' type="submit">Button 1</button>
@@ -50,13 +45,13 @@
                                 </div>
                                 <div class="card m-3" >
                                     
-                                    <img class="card-img-top" src="{{url_for('static', filename = '4/img/'+img2+'.PNG')}}" alt="image2" >
+                                    <img class="card-img-top" src="{{url_for('static', filename = '4/img/' + img2 +'.PNG')}}" alt="image2" >
                                     <div class="card-body">
                                         <button id="button" name="button" class="btn btn-primary" value= '{{img2}}' type="submit">Button 2</button>
                                     </div>
                                 </div>
                                 <div class="card m-3" >
-                                    <img class="card-img-top" src="{{url_for('static', filename = '4/img/'+img3+'.PNG')}}" alt="image3" >
+                                    <img class="card-img-top" src="{{url_for('static', filename = '4/img/' + img3 +'.PNG')}}" alt="image3" >
                                     
                                     <div class="card-body">
                                         <button id="button"name="button" class="btn btn-primary" value= '{{img3}}' type="submit">Button 3</button>
@@ -64,7 +59,7 @@
                                     </div>
                                 </div>
                                 <div class="card m-3" >
-                                    <img class="card-img-top" src="{{url_for('static', filename = '4/img/'+img4+'.PNG')}}" alt="image4" >
+                                    <img class="card-img-top" src="{{url_for('static', filename = '4/img/' + img4 +'.PNG')}}" alt="image4" >
                                     <div class="card-body">
                                         
                                         <button id="button" name="button" class="btn btn-primary" value= '{{img4}}' type="submit">Button 4</button>
@@ -128,7 +123,7 @@
 </footer>
 
        <!--scripts-->
-       <script type="text/javascript" src="{{ url_for('static', filename='s\4_java.js') }}"></script>
+       <script type="text/javascript" src="{{ url_for('static', filename='js\4_java.js') }}"></script>
        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
        <script type="text/javascript" src="{{ url_for('static', filename='js/all-plugins.js') }}"></script>
        <script type="text/javascript" src="{{ url_for('static', filename='js/plugins-activate.js') }}"></script>
