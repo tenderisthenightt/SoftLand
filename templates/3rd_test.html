@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=0.1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
         
@@ -18,8 +18,8 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/styles.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/custom-responsive-styles.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/static/styles/huiyacanvars.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/huiyaborder.css') }}" type="text/css">
     
-      </head>
 
     <title>check</title>
     <style>
@@ -29,16 +29,24 @@
         span {font-weight: lighter;}
     </style>
 </head>
+
 <body>
     <br>
     <h1 align="center"> 글 -> 그림 </h1>
-    <br>
+    <p style="text-align:center;"> 🐇토끼🐇를 그려주세요
         <div style="border: px solid; padding :10px; width: 820px; 
         height: 450px ; border-radius:2em; margin:auto; 
         padding-top:50px; background-color:rgb(255, 255, 255) ">
-                       <!--모델-->
-    
-                       <!--모델-->
+        <div>
+          <!--그림판-->
+        <canvas id="jsCanvas" class="canvas"></canvas>
+        <center>
+        <div class="controls__btns">
+          <button id="jsBrush">브러쉬</button>
+          <button id="jsAllremove">전체지우기</button>
+          <button id="jsSubmitButton">제출</button>
+        </div>
+          <!--그림판 끝-->
         </div>
     <h2>
         <div>
@@ -48,7 +56,7 @@
                 width: 180px; height:100; padding-top:12px; padding-bottom:12px;
                 border-radius:15px; cursor : pointer ;  font-size:19px; 
                 font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-                font-weight:bolder;  color:rgb(0, 0, 0); "onClick="location.href='/find_diff'">
+                font-weight:bolder;  color:rgb(0, 0, 0); " onClick="location.href='/wrong_img'">
             </center>
         </div>
     </h2>
@@ -92,5 +100,6 @@
    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/all-plugins.js') }}"></script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/plugins-activate.js') }}"></script>
+   <script src="{{ url_for('static', filename='js/huiyacanvars.js') }}"></script>
 </body>
 </html>
