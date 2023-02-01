@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="ko">
-
-    <head>
+<head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=0.1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-
-        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-32x32.png') }}" sizes="32x32" />
-        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-16x16.png') }}" sizes="16x16" />
-        <title>MCI</title>
-
+        <link rel="icon" type="image/png" href="../static/images/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="../static/images/favicon-16x16.png" sizes="16x16" />
+        <title>Travel</title>
         <!--stylesheet-->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/styles.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/custom-responsive-styles.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/static/styles/huiyacanvars.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/huiyacanvars.css') }}" type="text/css">
+        <!--scripts-->
+        <script src="../game/4_틀린그림찾기/4_java.js"></script>
+        <script type="text/javascript" src="../static/scripts/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="../static/scripts/all-plugins.js"></script>
+        <script type="text/javascript" src="../static/scripts/plugins-activate.js"></script>
 
     <title>check</title>
-
     <style>
         body {background: linear-gradient(274deg, #4de4cd, #62e2af 44%, #ed77ff)};
         h1 {font-family: 'Times New Roman', Times, serif; padding: 7px;}
@@ -28,67 +29,64 @@
         span {font-weight: lighter;}
     </style>
 </head>
-
 <body>
     <br>
     <h1 align="center"> 틀린그림찾기</h1>
-    <p style="text-align:center;">다음 그림을 보고 종류가 다른 한 가지를 고르세요 </p>
     <br>
         <div style="border: px solid; padding :10px; width: 820px; 
         height: 450px ; border-radius:2em; margin:auto; 
-        padding-top:50px; background-color:rgb(255, 255, 255)">
-
+        padding-top:50px; background-color:rgb(255, 255, 255) ">
                        <!--모델-->
-                       <!--img 지영이한테 받아서 경로 설정 다시해주기-->
+                       <form action="{{ url_for('wrong_img') }}" method="POST">
                        <div class="container4">
                         <div class="row">
-                            <div class="col-3">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename = 'game/4_find_diff/4_img/phone_1.png')}}" alt="Image1" class="card-img-top">
+                            <div class="col-12 d-flex justify-content-center">
+                                <div class="card m-3" >
+                                    <img class="card-img-top" src = "{{url_for('static', filename = '4/img/'+img1+'.PNG')}}" alt="image1" >
+                                
                                     <div class="card-body">
-                                        <button id="button1" class="btn btn-primary">Button 1</button>
+                                        <button id="button" name="button" class="btn btn-primary" value= '{{img1}}' type="submit">Button 1</button>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename = 'game/4_find_diff/4_img/phone_1.png')}}" alt="Image1" class="card-img-top">
+                                <div class="card m-3" >
+                                    
+                                    <img class="card-img-top" src="{{url_for('static', filename = '4/img/'+img2+'.PNG')}}" alt="image2" >
                                     <div class="card-body">
-                                        <button id="button2" class="btn btn-primary">Button 2</button>
+                                        <button id="button" name="button" class="btn btn-primary" value= '{{img2}}' type="submit">Button 2</button>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename = 'game/4_find_diff/4_img/phone_1.png')}}" alt="Image1" class="card-img-top">
+                                <div class="card m-3" >
+                                    <img class="card-img-top" src="{{url_for('static', filename = '4/img/'+img3+'.PNG')}}" alt="image3" >
+                                    
                                     <div class="card-body">
-                                        <button id="button3" class="btn btn-primary">Button 3</button>
+                                        <button id="button"name="button" class="btn btn-primary" value= '{{img3}}' type="submit">Button 3</button>
+                                        
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="card">
-                                    <img src="{{ url_for('static', filename = 'game/4_find_diff/4_img/phone_1.png')}}" alt="Image1" class="card-img-top">
+                                <div class="card m-3" >
+                                    <img class="card-img-top" src="{{url_for('static', filename = '4/img/'+img4+'.PNG')}}" alt="image4" >
                                     <div class="card-body">
-                                        <button id="button4" class="btn btn-primary">Button 4</button>
+                                        
+                                        <button id="button" name="button" class="btn btn-primary" value= '{{img4}}' type="submit">Button 4</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>    
-                </div> 
-                <!--모델-->
+                    </div>  
+                    
+                      
+                    <!--모델-->
       
-        
+        </div>
     <h2>
         <div>
             <center>
                 <br>
                 <input type="button" value="다음으로 넘어가기" style="
                 width: 180px; height:100; padding-top:12px; padding-bottom:12px;
-                border-radius:15px; cursor : pointer ;  font-size:19px; 
+                border-radius:15px; cursor : pointer ;  font-size:20px; 
                 font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-                font-weight:bolder;  color:rgb(0, 0, 0); "onClick="location.href='/pygame'">
+                font-weight:bolder;  color:rgb(0, 0, 0); "onClick="location.href='5th_test.html'">
             </center>
         </div>
     </h2>
@@ -105,7 +103,6 @@
     <br>
     <br>
 </section>
-
 <footer class="footer text-center">
   <div class="container">
     <ul class="list-inline">
@@ -127,13 +124,14 @@
     </ul>
     <p class="text-muted small mb-0">Copyright © Your Website 2018</p>
     <p class="text-muted small mb-0">Designed by <a href="https://www.position2.com/" target="_balnk">Position2</p>
-    </div>
-    </footer>
+  </div>
+</footer>
 
-    <!--scripts-->
-    <script type="text/javascript" src="{{ url_for('static', filename='js/4_java.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/all-plugins.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/plugins-activate.js') }}"></script>
+       <!--scripts-->
+       <script type="text/javascript" src="{{ url_for('static', filename='s\4_java.js') }}"></script>
+       <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+       <script type="text/javascript" src="{{ url_for('static', filename='js/all-plugins.js') }}"></script>
+       <script type="text/javascript" src="{{ url_for('static', filename='js/plugins-activate.js') }}"></script>
+
 </body>
 </html>

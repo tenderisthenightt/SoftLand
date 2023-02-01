@@ -49,7 +49,7 @@
 
     <!--모델-->
       <div>
-        <img id="image" src="{{ url_for('static', filename='game/2_스트루프/flask/static/img/1/001.png') }}" class="img-fluid" alt="Square Image">
+        <img id="image" src="{{ url_for('static', filename='2/img/001.png') }}" class="img-fluid" alt="Square Image">
         <!-- <img id="image" src="static/img/001.png" class="img-fluid" alt="Square Image"> -->
       </div>
     </div>
@@ -57,7 +57,7 @@
       <input id="input" type="text" class="form-control" placeholder="여기에 입력">
       <button id="submit" class="btn btn-primary" ;>제출</button>
     </div>
-  </div>
+    </div>
   <script>
     let content = "반응 시간,파일 이름,정답,입력,정오\n";
     let prevTime = Date.now();
@@ -92,8 +92,18 @@
         downloadCSV(content, 'result.csv');
         return;
       }
-      document.getElementById('image').src = `static/game/2_스트루프/flask/static/img/1/${(index + 1).toString().padStart(3, '0')}.png`;
+      document.getElementById('image').src = `static/2/img/${(index + 1).toString().padStart(3, '0')}.png`;
     })
+
+    var input = document.getElementById("input");
+        input.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          document.getElementById("submit").click();
+        }
+    });
+    // 엔터 submit기능
+
   </script>
   <!--모델 끝-->
 
