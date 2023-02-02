@@ -1,51 +1,72 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=0.1, shrink-to-fit=no">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        
-        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-32x32.png') }}" sizes="32x32" />
-        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-16x16.png') }}" sizes="16x16" />
-        <title>MCI</title>
 
-        <!--stylesheet-->
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/styles.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/custom-responsive-styles.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/static/styles/huiyacanvars.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/huiyaborder.css') }}" type="text/css">
-    
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=0.1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-32x32.png') }}" sizes="32x32" />
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-16x16.png') }}" sizes="16x16" />
+  <title>MCI</title>
+  <!--stylesheet-->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/styles.css') }}" type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/custom-responsive-styles.css') }}"
+    type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/huiyacanvars.css') }}" type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/huiyaborder.css') }}" type="text/css">
 
-    <title>check</title>
-    <style>
-        body {background: linear-gradient(274deg, #4de4cd, #62a4e2 44%, #ffdd77)};
-        h1 {font-family: 'Times New Roman', Times, serif; padding: 7px;}
-        li {font-weight: bolder; list-style: none; font-size : 15px}
-        span {font-weight: lighter;}
-    </style>
+
+  <style>
+    body {
+      background: linear-gradient(274deg, #4670d0, #66e262 44%, #fffd77)
+    }
+
+    ;
+
+    h1 {
+      font-family: 'Times New Roman', Times, serif;
+      padding: 7px;
+    }
+
+    li {
+      font-weight: bolder;
+      list-style: none;
+      font-size: 15px
+    }
+
+    span {
+      font-weight: lighter;
+    }
+  </style>
 </head>
 
 <body>
     <br>
     <h1 align="center"> 글 -> 그림 </h1>
-    <p style="text-align:center;"> 🐇토끼🐇를 그려주세요
-        <div style="border: px solid; padding :10px; width: 820px; 
-        height: 450px ; border-radius:2em; margin:auto; 
-        padding-top:50px; background-color:rgb(255, 255, 255) ">
-        <div>
-          <!--그림판-->
+    <p style="text-align:center;"> 토끼를 그려주세요
+    <div class='container'>
+      <div style="border: px solid; padding :10px; width: 820px; 
+      height: 500px ; border-radius:2em; margin:auto; 
+      padding-top:50px; background-color:#fff ">
+      <div>
+      <!--그림판-->
+      <center>
         <canvas id="jsCanvas" class="canvas"></canvas>
-        <center>
-        <div class="controls__btns">
-          <button id="jsBrush">브러쉬</button>
-          <button id="jsAllremove">전체지우기</button>
-          <button id="jsSubmitButton">제출</button>
-        </div>
+      </center>
+    </div>
+
+    <div class="controls__btns">
+      <center>
+        <button id="jsBrush">브러쉬</button>
+        <button id="jsAllremove">전체지우기</button>
+        <button id="jsSubmitButton">제출</button>
+      </center>
+    </div>
           <!--그림판 끝-->
         </div>
     <h2>

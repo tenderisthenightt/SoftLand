@@ -1,145 +1,171 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=0.1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=0.1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-32x32.png') }}" sizes="32x32" />
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-16x16.png') }}" sizes="16x16" />
+  <title>MCI</title>
+  <!--stylesheet-->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/styles.css') }}" type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/custom-responsive-styles.css') }}"
+    type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/huiyacanvars.css') }}" type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/huiyaborder.css') }}" type="text/css">
 
-        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-32x32.png') }}" sizes="32x32" />
-        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-16x16.png') }}" sizes="16x16" />
-        <title>MCI</title>
 
-        <!--stylesheet-->
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/styles.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/custom-responsive-styles.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/huiyacanvars.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/huiyaborder.css') }}" type="text/css">
+  <style>
+    body {
+      background: linear-gradient(274deg, #4670d0, #66e262 44%, #fffd77)
+    }
 
-    <title>check</title>
+    ;
 
-    <style>
-        body {background: linear-gradient(274deg, #4670d0, #66e262 44%, #fffd77)};
-        h1 {font-family: 'Times New Roman', Times, serif; padding: 7px;}
-        li {font-weight: bolder; list-style: none; font-size : 15px}
-        span {font-weight: lighter;}
-    </style>
-    
-    <style>
-      .controls__btns {
-        display: flex;
-        justify-content: center;
-      }
-    </style>
-  </head>
+    h1 {
+      font-family: 'Times New Roman', Times, serif;
+      padding: 7px;
+    }
+
+    li {
+      font-weight: bolder;
+      list-style: none;
+      font-size: 15px
+    }
+
+    span {
+      font-weight: lighter;
+    }
+
+    .controls__btns {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+
+</head>
 
 <body>
-    <br>
-    <h1 align="center"> <br> 유사도 </h1>
-    <p style="text-align:center;">nn초동안 그림을 잘 기억한 후 최대한 비슷하게 그려주세요<br>다 그린 후 제출 버튼을 누르고 다음으로 넘어가세요
-      <div style="border: px solid; padding :10px; width: 820px; 
+  <br>
+  <h1 align="center"> <br> 유사도 </h1>
+  <p style="text-align:center;">nn초동안 그림을 잘 기억한 후 최대한 비슷하게 그려주세요<br>다 그린 후 제출 버튼을 누르고 다음으로 넘어가세요
+  <div class='container'>
+    <div style="border: px solid; padding :10px; width: 820px; 
         height: 500px ; border-radius:2em; margin:auto; 
         padding-top:50px; background-color:#fff ">
-        <div>
-          <!--그림판-->
-          <center>
-          <img id="image" src={{h_path}} style="display: none;" width = 450>
-        </div>
+      <div>
+
+        <center>
+          <img id="image" src={{h_path}} style="display: none;" width=450>
+        </center>
+      </div>
+      <div>
+        <!--그림판-->
         <canvas id="jsCanvas" class="canvas" style="display:none;"></canvas>
         <center>
-          
-        <div class="controls__btns" style="display: flex; justify-content: center;">
-          <button id="jsBrush">브러쉬</button>
-          <button id="jsAllremove">전체지우기</button>
-          <button id="jsSubmitButton">제출</button>
-        </div>
-          <script src="{{ url_for('static', filename='js/huiyacanvars.js') }}"></script>
-          <form id="form" method="post" action="/image-similarity" enctype="multipart/form-data" style="display: none">
-            <input type="hidden" name="p_path" value={{p_path}}>
-            <input type="hidden" name="sim" value={{sim}}>
-            <input type="file" name="file" id="file">
-          </center>
-          <!--그림판 끝-->
-          <script>
-            document.getElementById("image").style.display = "block";
-            document.getElementById("jsBrush").style.display = "none";
-            document.getElementById("jsAllremove").style.display = "none";
-            document.getElementById("jsSubmitButton").style.display = "none";
+      </div>
 
-            setTimeout(function() {
-              document.getElementById("image").style.display = "none";
-            }, 2000);
-            setTimeout(function(){
-              document.getElementById("jsCanvas").style.display = "block";
-            }, 2000);
-            setTimeout(function () {
-              document.getElementById("jsBrush").style.display = "none";
-            }, 2000);
-            
-            setTimeout(function () {
-              document.getElementById("jsAllremove").style.display = "flex";
-            }, 2000);
-            
-            setTimeout(function () {
-              document.getElementById("jsSubmitButton").style.display = "flex";
-            }, 2000);
-          </script>
-        </div>
+      <div class="controls__btns" style="display: flex; justify-content: center;">
+        <button id="jsBrush">브러쉬</button>
+        <button id="jsAllremove">전체지우기</button>
+        <button id="jsSubmitButton">제출</button>
+      </div>
+      </center>
+
+      <form id="form" method="post" action="/image-similarity" enctype="multipart/form-data" style="display: none">
+        <input type="hidden" name="p_path" value={{p_path}}>
+        <input type="hidden" name="sim" value={{sim}}>
+        <input type="file" name="file" id="file">
+      </form>
+
+        <!--그림판 끝-->
+        <script>
+          document.getElementById("image").style.display = "block";
+          document.getElementById('jsCanvas').style.display = 'none';
+          document.getElementById('jsBrush').style.display = 'none';
+          document.getElementById('jsAllremove').style.display = 'none';
+          document.getElementById('jsSubmitButton').style.display = 'none';
+          setTimeout(function () {
+            document.getElementById("image").style.display = "none";
+          }, 2000);
+
+          setTimeout(function () {
+            document.getElementById("jsCanvas").style.display = "block";
+          }, 2000);
+
+          setTimeout(function () {
+            document.getElementById("jsBrush").style.display = "none";
+          }, 2000);
+
+          setTimeout(function () {
+            document.getElementById("jsAllremove").style.display = "flex";
+          }, 2000);
+
+          setTimeout(function () {
+            document.getElementById("jsSubmitButton").style.display = "flex";
+          }, 2000);
+        </script>
+    </div>
     <h2>
-        <div>
-            <center>
-                <br>
-                <input type="button" value="다음으로 넘어가기" style="
+      <div>
+        <center>
+          <br>
+          <input type="button" value="다음으로 넘어가기" style="
                 width: 180px; height:100; padding-top:12px; padding-bottom:12px;
                 border-radius:15px; cursor : pointer ;  font-size:19px; 
                 font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-                font-weight:bolder;  color:rgb(0, 0, 0); "onClick="location.href='/stroop'">
-            </center>
-        </div>
+                font-weight:bolder;  color:rgb(0, 0, 0); " onClick="location.href='/stroop'">
+        </center>
+      </div>
     </h2>
     <h3>
-        <form align="center">
-            <center>
-                <div style="border: 2px solid; padding :10px; height: 85px; width: 180px;
+      <form align="center">
+        <center>
+          <div style="border: 2px solid; padding :10px; height: 85px; width: 180px;
                     padding-top:7px; background-color:rgba(255, 255, 255, 0.455);">
-                    <p style="margin-top:1px;"> provided by<br> Team.인절미</p>
-                </div>
-            </center>    
-        </form>  
+            <p style="margin-top:1px;"> provided by<br> Team.인절미</p>
+          </div>
+        </center>
+      </form>
     </h3>
     <br>
     <br>
-</section>
-<footer class="footer text-center">
-  <div class="container">
-    <ul class="list-inline">
-      <li class="list-inline-item">
-        <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
-            <i class="fa fa-facebook" aria-hidden="true"></i>
-          </a>
-      </li>
-      <li class="list-inline-item">
-        <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
-            <i class="fa fa-twitter" aria-hidden="true"></i>
-          </a>
-      </li>
-      <li class="list-inline-item">
-        <a class="social-link rounded-circle text-white" href="javascript:void(0)">
-            <i class="fa fa-linkedin" aria-hidden="true"></i>
-          </a>
-      </li>
-    </ul>
-    <p class="text-muted small mb-0">Copyright © Your Website 2018</p>
-    <p class="text-muted small mb-0">Designed by <a href="https://www.position2.com/" target="_balnk">Position2</p>
-  </div>
-</footer>
+    </section>
+    <footer class="footer text-center">
+      <div class="container">
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a class="social-link rounded-circle text-white" href="javascript:void(0)">
+              <i class="fa fa-linkedin" aria-hidden="true"></i>
+            </a>
+          </li>
+        </ul>
+        <p class="text-muted small mb-0">Copyright © Your Website 2018</p>
+        <p class="text-muted small mb-0">Designed by <a href="https://www.position2.com/" target="_balnk">Position2</p>
+      </div>
+    </footer>
 
-        <!--scripts-->
-        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/all-plugins.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/plugins-activate.js') }}"></script>
+    <!--scripts-->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/all-plugins.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/plugins-activate.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/huiyacanvars.js') }}"></script>
 </body>
+
 </html>

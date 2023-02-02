@@ -76,7 +76,7 @@ def similarity_image():
 @app.route("/image-similarity", methods=["POST"])
 def image_similarity():
     f = request.files['file']
-    img_path = 'static/1/img/anchor/img.jpg'
+    img_path = 'static/1/img/img.png'
     f.save(img_path)
     p_path = str(request.form['p_path'])
     sim = float(request.form['sim'])
