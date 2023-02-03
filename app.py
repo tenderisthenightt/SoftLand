@@ -472,9 +472,9 @@ cur = conn.cursor()
 
 ################### 결과페이지 : 대시보드 ###################
 
-# @app.route('/dashboard')
-# def dashboard():
-#     return render_template('dashboard.html')
+@app.route('/result')
+def result():
+    return render_template('result_2.html')
 
 # @app.route('/charts')
 # def charts():
