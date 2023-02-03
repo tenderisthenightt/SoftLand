@@ -120,14 +120,14 @@
                 width: 180px; height:100; padding-top:12px; padding-bottom:12px;
                 border-radius:15px; cursor : pointer ;  font-size:19px; 
                 font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-                font-weight:bolder;  color:rgb(0, 0, 0); " onClick="location.href='/stroop'">
+                font-weight:bolder;  color:rgb(0, 0, 0); " onClick="window.location.href='/stroop'">
         </center>
       </div>
     </h2>
     <h3>
       <form align="center">
         <center>
-          <div style="border: 2px solid; padding :10px; height: 85px; width: 180px;
+          <div style="border: 2px solid; padding :10px; height: 85px; width: 200px;
                     padding-top:7px; background-color:rgba(255, 255, 255, 0.455);">
             <p style="margin-top:1px;"> provided by<br> Team.인절미</p>
           </div>
@@ -137,29 +137,30 @@
     <br>
     <br>
     </section>
+
     <footer class="footer text-center">
-      <div class="container">
-        <ul class="list-inline">
-          <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
-              <i class="fa fa-facebook" aria-hidden="true"></i>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
-              <i class="fa fa-twitter" aria-hidden="true"></i>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white" href="javascript:void(0)">
-              <i class="fa fa-linkedin" aria-hidden="true"></i>
-            </a>
-          </li>
-        </ul>
-        <p class="text-muted small mb-0">Copyright © Your Website 2018</p>
-        <p class="text-muted small mb-0">Designed by <a href="https://www.position2.com/" target="_balnk">Position2</p>
-      </div>
-    </footer>
+  <div class="container">
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
+          <i class="fa fa-facebook" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white" href="javascript:void(0)">
+          <i class="fa fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
+    <p class="text-muted small mb-0">Copyright © Your Website 2018</p>
+    <p class="text-muted small mb-0">Designed by <a href="https://www.position2.com/" target="_balnk">Position2</p>
+  </div>
+</footer>
 
     <!--scripts-->
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
