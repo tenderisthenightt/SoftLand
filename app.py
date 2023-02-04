@@ -468,8 +468,6 @@ cur = conn.cursor()
 #         return render_template('6th_test.html', target = sentence2, sound = sentence1, ck=String)
 
 
-
-
 ################### 결과페이지 : 대시보드 ###################
 
 @app.route('/result')
