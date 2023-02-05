@@ -1,28 +1,22 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=0.1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" type="image/png" href="../static/images/favicon-32x32.png" sizes="32x32" />
-        <link rel="icon" type="image/png" href="../static/images/favicon-16x16.png" sizes="16x16" />
+        <link rel="icon" href="{{ url_for('static', filename='images/favicon-32x32.png') }}" sizes="32x32">
+        <link rel="icon" href="{{ url_for('static', filename='images/favicon-16x16.png') }}" sizes="16x16">
         <title>Travel</title>
+
         <!--stylesheet-->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="../static/styles/styles.css" rel="stylesheet" type="text/css">
-        <link href="../static/styles/custom-responsive-styles.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="../static/styles/huiyacanvars.css" />
-        <!--scripts-->
-        <script src="../game/4_틀린그림찾기/4_java.js"></script>
-        <script type="text/javascript" src="../static/scripts/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="../static/scripts/all-plugins.js"></script>
-        <script type="text/javascript" src="../static/scripts/plugins-activate.js"></script>
-      </head>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/styles.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/custom-responsive-styles.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/huiyacanvars.css') }}" type="text/css">
+
     <title>check</title>
     <style>
         body {background: linear-gradient(274deg, #4de4cd, #62e2af 44%, #ed77ff)};
@@ -31,6 +25,7 @@
         span {font-weight: lighter;}
     </style>
 </head>
+
 <body>
     <br>
     <h1 align="center"> 틀린그림찾기</h1>
@@ -91,5 +86,12 @@
     <p class="text-muted small mb-0">Designed by <a href="https://www.position2.com/" target="_balnk">Position2</p>
   </div>
 </footer>
+
+        <!--scripts-->
+        <script type="text/javascript" src="{{ url_for('static', filename='js/4_java.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/all-plugins.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/plugins-activate.js') }}"></script>
+
 </body>
 </html>
