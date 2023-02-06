@@ -4,7 +4,7 @@ const ctx = canvas.getContext("2d");
 const brush = document.getElementById("jsBrush");
 const erase = document.getElementById("jsErase");
 const submitButton = document.getElementById("jsSubmitButton");
-const submitButton2 = document.getElementById("jsSubmitButton2");
+// const submitButton2 = document.getElementById("jsSubmitButton2");
 
 // send image
 // submitButton.addEventListener("click", () => {
@@ -41,7 +41,7 @@ submitButton.addEventListener("click", () => {
 
     fetch("/image-similarity", {
         method: "POST",
-        body: formData
+        body: formData,
     })
     .then(response => response.text())
     .then(result => {
@@ -51,25 +51,25 @@ submitButton.addEventListener("click", () => {
         console.error("Error:", error);
     });
 });
-    ``
+``
 
-submitButton2.addEventListener("click", () => {
-    const dataURI = canvas.toDataURL();
-    const imageBlob = dataURIToBlob(dataURI); // Convert the dataURI to a Blob object
-    const formData = new FormData();
-    formData.append('image', imageBlob, 'image.png'); // Add the Blob object to the form data with a file name
-    fetch('/predict', {
-        method: 'POST', 
-        body: formData, // Use the formData instead of JSON
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-});
+// submitButton2.addEventListener("click", () => {
+//     const dataURI = canvas.toDataURL();
+//     const imageBlob = dataURIToBlob(dataURI); // Convert the dataURI to a Blob object
+//     const formData = new FormData();
+//     formData.append('image', imageBlob, 'image.png'); // Add the Blob object to the form data with a file name
+//     fetch('/predict', {
+//         method: 'POST',
+//         body: formData, // Use the formData instead of JSON
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         console.log('Success:', data);
+//     })
+//     .catch((error) => {
+//         console.error('Error:', error);
+//     });
+// });
 
 // Helper function to convert dataURI to Blob
 function dataURIToBlob(dataURI) {

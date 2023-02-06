@@ -14,15 +14,20 @@ const myColor = document.querySelector('#jsMyColor')
 const range = document.querySelector('#jsRange');
 const mode = document.querySelector('#jsMode');
 const saveBtn = document.querySelector('#jsSave');
+// const Btn = document.querySelector('#jsMove');
 const resetBtn = document.querySelector('#jsReset');
 const resizeBtn = document.querySelector('#jsResize');
 const widthControls = document.querySelector('#jsWidth');
 const heightControls = document.querySelector('#jsHeight');
+
+// 이미지 보내기
+
+
 // Variable
 
-// 손 - 사이즈 조절함
-let canvasWidth = 800;
-let canvasHeight = 300;
+// !! 사이즈 조절함
+let canvasWidth = 820;
+let canvasHeight = 430;
 let isPainting = false;
 let isFilling = false;
 // Init setting
@@ -156,9 +161,19 @@ const handleSaveClick = () => {
   const image = canvas.toDataURL();
   const link = document.createElement('a');
   link.href = image;
-  link.download = 'PaintJS[Export]';
+  link.download = '글,그림 검사';
   link.click();
 }
+// // Event of Click move button(이미지 이동)
+// document.getElementById("save-btn").addEventListener("click", function() {
+//   let canvas = document.getElementById("jsCanvas");
+//   let dataURL = canvas.toDataURL();
+//   let xhr = new XMLHttpRequest();
+//   xhr.open("POST", "/predict", true);
+//   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+//   xhr.send("image=" + dataURL);
+// });
+
 // Event of Click reset button
 const handleResetClick = () => {
   initSetting();
