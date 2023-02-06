@@ -32,6 +32,38 @@
     <br>
     <h1 align="center"> 기억력 게임 </h1>
     <h5><p style="text-align:center;">화면에 보이는 숫자를 기억했다가 순서대로 눌러주세요</p></h5>
+    <div id="image-container">
+        <img src="{{ url_for('static', filename = 'face/heehyun.png')}}" alt="Image">
+        <div id="speech-bubble">
+          <p>Hello, I'm a chatbot.</p>
+        </div>
+        <style>
+          #image-container {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+          }
+          #image-container img {
+            width: 150px;
+            height: 150px;
+          }
+          #speech-bubble {
+            display: none;
+            position: absolute;
+            bottom: 140px;
+            right: 20px;
+            top: -115px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+          }
+          
+          #image-container:hover #speech-bubble {
+            display: block;
+          }
+        </style>
+      </div>
     <br>
     <div class="container">
         <div style="border: px solid; padding :10px; width: 820px; 

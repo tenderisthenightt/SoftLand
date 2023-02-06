@@ -11,7 +11,6 @@ import numpy as np
 import keras.utils as utils
 from anchor import *
 
-# 2nd test
 # 3rd test
 import pandas
 import torch
@@ -472,7 +471,7 @@ cur = conn.cursor()
 
 @app.route('/result')
 def result():
-    return render_template('result_2.html')
+    return render_template('dash.html')
 
 # @app.route('/charts')
 # def charts():
