@@ -74,7 +74,7 @@ def similarity_image():
 #     sim = float(request.form['sim'])
 #     return render_template('sim_test.html', p_path=p_path, sim=sim)
 
-@app.route("/image-similarity", methods=["POST"])
+@app.route("/image_similarity", methods=["POST"])
 def image_similarity():
     f = request.files['file']
     img_path = 'static/1/img/img.png'
@@ -526,7 +526,7 @@ if __name__ == '__main__':
     # https://flask.palletsprojects.com/en/2.0.x/api/#flask.Flask.run
     # https://snacky.tistory.com/9
      # host주소와 port number 선언
-    app.run(host='0.0.0.0', debug=True)  
+    app.run(host='0.0.0.0')  
     
     
     

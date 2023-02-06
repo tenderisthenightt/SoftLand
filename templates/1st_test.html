@@ -102,7 +102,7 @@
   </div>
   
 
-  <form id="form" method="post" action="/image-similarity" enctype="multipart/form-data" style="display: none">
+  <form id="form" method="post" action="/image_similarity" enctype="multipart/form-data" style="display: none">
     <input type="hidden" name="p_path" value={{p_path}}>
     <input type="hidden" name="sim" value={{sim}}>
     <input type="file" name="file" id="file">
@@ -148,7 +148,7 @@
       let formData = new FormData();
       formData.append("image", blob, "image.png");
       let xhr = new XMLHttpRequest();
-      xhr.open("POST", "/predict", true);
+      xhr.open("POST", "/image_similarity", true);
       xhr.send(formData);
     });
 
