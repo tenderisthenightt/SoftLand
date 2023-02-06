@@ -290,13 +290,6 @@ def end():
 def pygame():
     return render_template('5th_test.html')
 
-
-################### 6번째 게임 : STT ###################
-@app.route('/stt')
-def stt():
-    return render_template('6th_test.html')
-
-
 @app.route('/get_screenshot', methods=['POST'])
 def get_screenshot():
     
@@ -341,6 +334,12 @@ def get_screenshot():
     cur.close()
                 
     os.remove(file_name)
+
+
+################### 6번째 게임 : STT ###################
+@app.route('/stt')
+def stt():
+    return render_template('6th_test.html')
     
 
 DATABASE_URI = 'sttdb.db'
