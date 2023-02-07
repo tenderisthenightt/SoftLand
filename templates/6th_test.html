@@ -25,16 +25,47 @@
     <!--TTS-->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Test Sound</title>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>check</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='6/css/style.css') }}" type="text/css">
 </head>
 
 <body>
     <br>
-    <h1 align="center"> STT </h1>
-    <p style="text-align:center;">테스트 설명</p>
+    <h1 align="center"> 문장 따라 말하기 </h1>
+    <h5><p style="text-align:center;">제시되는 문장을 따라 말하고 제출해주세요</p></h5>
     <br>
+    <div id="image-container">
+        <img src="{{ url_for('static', filename = 'face/seungwoo.png')}}" alt="Image">
+        <div id="speech-bubble">
+          <p>Hello, I'm a chatbot.</p>
+        </div>
+        <style>
+          #image-container {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+          }
+          #image-container img {
+            width: 150px;
+            height: 150px;
+          }
+          #speech-bubble {
+            display: none;
+            position: absolute;
+            bottom: 140px;
+            right: 20px;
+            top: -115px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+          }
+          
+          #image-container:hover #speech-bubble {
+            display: block;
+          }
+        </style>
+      </div>
     <div class="container">
         <div style="border: px solid; padding :10px; width: 820px; 
         height: 450px ; border-radius:2em; margin : auto;
@@ -133,13 +164,13 @@
                                 break;
                             case 'ok':
                                 alert(e.target.responseText);
-                                alert("上传成功");
+                                alert("업로드 성공");
                                 break;
                             case 'error':
-                                alert("上传失败");
+                                alert("업로드 실패");
                                 break;
                             case 'cancel':
-                                alert("上传被取消");
+                                alert("업로드 취소");
                                 break;
                         }
                     });
@@ -200,8 +231,6 @@
                 }
             </script>
         </div>
-
-
         <!--모델-->
 
     </div>
@@ -213,7 +242,7 @@
                 width: 180px; height:100; padding-top:12px; padding-bottom:12px;
                 border-radius:15px; cursor : pointer ;  font-size:19px; 
                 font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-                font-weight:bolder;  color:rgb(0, 0, 0); " onClick="location.href='/'">
+                font-weight:bolder;  color:rgb(0, 0, 0); " onClick="window.location.href='/result'">
             </center>
         </div>
     </h2>
@@ -263,5 +292,4 @@
 
 
 </body>
-
 </html>

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=0.1, shrink-to-fit=no">
@@ -31,17 +30,60 @@
 
 <body>
     <br>
-    <h1 align="center"> 파이 게임</h1>
-    <p style="text-align:center;">게임 설명</p>
-    <br>
-        <div style="border: px solid; padding :10px; width: 820px; 
-        height: 450px ; border-radius:2em; margin:auto; 
-        padding-top:50px; background-color:rgb(255, 255, 255) ">
-                       <!--모델-->
-    
-                       <!--모델-->
-      
+    <h1 align="center"> 기억력 게임 </h1>
+    <h5><p style="text-align:center;">화면에 보이는 숫자를 기억했다가 순서대로 눌러주세요</p></h5>
+    <div id="image-container">
+        <img src="{{ url_for('static', filename = 'face/dongryul.png')}}" alt="Image">
+        <div id="speech-bubble">
+          <p>Hello, I'm a chatbot.</p>
         </div>
+        <style>
+          #image-container {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+          }
+          #image-container img {
+            width: 150px;
+            height: 150px;
+          }
+          #speech-bubble {
+            display: none;
+            position: absolute;
+            bottom: 140px;
+            right: 20px;
+            top: -115px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+          }
+          
+          #image-container:hover #speech-bubble {
+            display: block;
+          }
+        </style>
+      </div>
+    <br>
+    <div class="container">
+        <div style="border: px solid; padding :10px; width: 820px; 
+        height: 540px ; border-radius:2em; margin:auto; 
+        padding-top:50px; background-color:rgb(255, 255, 255) ">
+
+
+            <div id="view_html_game_page_39195" class="view_html_game_page view_game_page page_widget ready">
+                <div id="html_embed_widget_12788" class="html_embed_widget embed_wrapper">
+                    <div data-height="360" class="game_frame game_loaded" data-width="640"
+                        style="width: 640px; height: 360px"><iframe id="game_drop" allowfullscreen="true"
+                            src="https://v6p9d9t4.ssl.hwcdn.net/html/7248835/web/index.html" frameborder="0"
+                            allow="autoplay; fullscreen *; geolocation; microphone; camera; midi; monetization; xr-spatial-tracking; gamepad; gyroscope; accelerometer; xr; cross-origin-isolated"
+                            width='800' height='450' scrolling="no" allowtransparency="true"
+                            webkitallowfullscreen="true" mozallowfullscreen="true" msallowfullscreen="true"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <h2>
         <div>
             <center>
@@ -50,9 +92,24 @@
                 width: 180px; height:100; padding-top:12px; padding-bottom:12px;
                 border-radius:15px; cursor : pointer ;  font-size:19px; 
                 font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-                font-weight:bolder;  color:rgb(0, 0, 0); "onClick="location.href='/stt'">
+                font-weight:bolder;  color:rgb(0, 0, 0); "onClick="window.location.href='/stt'">
             </center>
         </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script type=text/javascript>
+              $('#get_ss').click(function() {
+                $('#get_ss').addClass('is-loading');
+                $.ajax({
+                  url: '/get_screenshot',
+                  type: 'POST',
+                  success: function(response) {
+                    $('#show_ss').html(response);
+                    $('#get_ss').hide();
+                  }
+                });
+              });
+        </script>
     </h2>
     <h3>
         <form align="center">
@@ -69,32 +126,34 @@
 </section>
 
 <footer class="footer text-center">
-  <div class="container">
-    <ul class="list-inline">
-      <li class="list-inline-item">
-        <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
-            <i class="fa fa-facebook" aria-hidden="true"></i>
-          </a>
-      </li>
-      <li class="list-inline-item">
-        <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
-            <i class="fa fa-twitter" aria-hidden="true"></i>
-          </a>
-      </li>
-      <li class="list-inline-item">
-        <a class="social-link rounded-circle text-white" href="javascript:void(0)">
-            <i class="fa fa-linkedin" aria-hidden="true"></i>
-          </a>
-      </li>
-    </ul>
-    <p class="text-muted small mb-0">Copyright © Your Website 2018</p>
-    <p class="text-muted small mb-0">Designed by <a href="https://www.position2.com/" target="_balnk">Position2</p>
-  </div>
-  </footer>
+    <div class="container">
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="social-link rounded-circle text-white" href="javascript:void(0)">
+                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+        <p class="text-muted small mb-0">Copyright © Your Website 2018</p>
+        <p class="text-muted small mb-0">Designed by <a href="https://www.position2.com/" target="_balnk">Position2
+        </p>
+    </div>
+</footer>
 
     <!--scripts-->
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/all-plugins.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/plugins-activate.js') }}"></script>
 </body>
+
 </html>

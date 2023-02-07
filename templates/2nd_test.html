@@ -41,7 +41,40 @@
 <body>
   <br>
   <h1 align="center"> 스트루프 게임 </h1>
+  <h5><p style="text-align:center;">글자의 색깔이 무엇인지 입력해주세요</h5>
   <br>
+  <div id="image-container">
+    <img src="{{ url_for('static', filename = 'face/jungeun.png')}}" alt="Image">
+    <div id="speech-bubble">
+      <p>Hello, I'm a chatbot.</p>
+    </div>
+    <style>
+      #image-container {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+      }
+      #image-container img {
+        width: 150px;
+        height: 150px;
+      }
+      #speech-bubble {
+        display: none;
+        position: absolute;
+        bottom: 140px;
+        right: 20px;
+        top: -115px;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      #image-container:hover #speech-bubble {
+        display: block;
+      }
+    </style>
+  </div>
   <div class="container">
     <div style="border: px solid; padding :10px; width: 820px; 
       height: 450px ; border-radius:2em; margin-left: -190px; overflow: hidden;
@@ -49,7 +82,7 @@
 
     <!--모델-->
       <div>
-        <img id="image" src="{{ url_for('static', filename='game/2_스트루프/flask/static/img/1/001.png') }}" class="img-fluid" alt="Square Image">
+        <img id="image" src="{{ url_for('static', filename='2/img/001.png') }}" class="img-fluid" alt="Square Image">
         <!-- <img id="image" src="static/img/001.png" class="img-fluid" alt="Square Image"> -->
       </div>
     </div>
@@ -57,7 +90,7 @@
       <input id="input" type="text" class="form-control" placeholder="여기에 입력">
       <button id="submit" class="btn btn-primary" ;>제출</button>
     </div>
-  </div>
+    </div>
   <script>
     let content = "반응 시간,파일 이름,정답,입력,정오\n";
     let prevTime = Date.now();
@@ -92,8 +125,18 @@
         downloadCSV(content, 'result.csv');
         return;
       }
-      document.getElementById('image').src = `static/game/2_스트루프/flask/static/img/1/${(index + 1).toString().padStart(3, '0')}.png`;
+      document.getElementById('image').src = `static/2/img/${(index + 1).toString().padStart(3, '0')}.png`;
     })
+
+    var input = document.getElementById("input");
+        input.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          document.getElementById("submit").click();
+        }
+    });
+    // 엔터 submit기능
+
   </script>
   <!--모델 끝-->
 
