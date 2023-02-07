@@ -12,7 +12,6 @@ import keras.utils as utils
 from anchor import *
 import PIL
 
-# 2nd test
 # 3rd test
 import pandas
 import torch
@@ -73,6 +72,11 @@ def similarity_image():
     print(anch)
     return render_template('1st_test.html', h_path=h_path)
 
+# @app.route("/sim_test", methods=["POST"])
+# def sim_test():
+#     p_path = str(request.form['p_path'])
+#     sim = float(request.form['sim'])
+#     return render_template('sim_test.html', p_path=p_path, sim=sim)
 
 @app.route("/image_similarity", methods=["POST"])
 def image_similarity():
@@ -91,12 +95,27 @@ def image_similarity():
         p_path = anchor[anch][0]
         sim = anchor[anch][2]
 
+
+    print('333333333333333')
+    
+
     features1 = get_image_feature(p_path)
     features2 = get_image_feature(image)
+    print('44444444444444')
     cosine_similarity = np.dot(features1, features2) / (np.linalg.norm(features1) * np.linalg.norm(features2))
     print(cosine_similarity)
+   
+   
+    # db 저장하기
+    OX = []
+    if cosine_similarity >= sim:
+        OX.append('정답')
+    else: OX.append('오답') 
+    print(OX)
+   
 
     # DB 생성 / 이미 있으면 나중에 주석처리하기.
+    # isolation_level = None (auto commit)
     conn = sqlite3.connect('ijm.db', isolation_level=None)
     # 커서
     cursor = conn.cursor()
@@ -121,7 +140,8 @@ def image_similarity():
 
     conn.commit()
     cursor.close()
-    conn.close() 
+    conn.close()    
+    return render_template('1st_test.html')
 
 
 ################### 2번째 게임 : 스트루프 ###################
@@ -137,11 +157,33 @@ def text_to_img():
 
 @app.route("/predict", methods=["GET", "POST"])
 def predict():
+    print('1111111111111111')
+    # 이미지 받기(blob)
+    if request.method == 'POST':
+        image = request.files["image"]
+        # Save image_binary to a file or a variable
+        image.save('image.png')
+
+
+
+    # with open("image.png", "wb") as f:
+    #     f.write(image)
+    
+    print('22222222222222')
+    
+    # e=open('Base64_dec.png','wb') 
+    # e.write(image_binary)
+    # e.save(image_binary)
+    # e.close()
+    
+    
+    
     # Model(YOLOv5 종속 항목 설치)
     model = torch.hub.load('ultralytics/yolov5', 'custom', path = 'best.pt', force_reload =True)
     # Image
-    img = ['C:\\Users\\admin\\Desktop\\최종 프로젝트\\글,그림\\벤치.png']
-    # 그림판에그림을 그려서 어떻게 여기에 갖고올지 생각... img 변수에 담기
+    print('asdadasdasdasdas')
+    img = PIL.Image.open('image.png')
+    print('ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅁㄴㅇㅁㄴㅇㅁㄴㅇ')
     ########## 이 사진을 어떻게 가지고 올지에 대해서 알아봐야한다. !!
 
     # 추론
@@ -155,10 +197,11 @@ def predict():
     #results.xyxy[0]  # 예측 (tensor)
     # results.pandas().xyxy[0]  # 예측 (pandas)
     conf = results.pandas().xyxy[0]
+
    
     # 오답 여부
     OX = []
-    if str(conf.name) == '토끼':
+    if conf.name[0] == 'rabbit':
         OX.append('정답')
     else : OX.append('오답')
     print(OX)
@@ -191,9 +234,7 @@ def predict():
     conn.commit()
     cursor.close()
     conn.close()    
-
-    
-    render_template('3th_test.html')
+    return render_template('3rd_test.html')
 
 ################ 4번째게임 : 틀린그림찾기 ###############
 
@@ -540,5 +581,5 @@ if __name__ == '__main__':
     # https://flask.palletsprojects.com/en/2.0.x/api/#flask.Flask.run
     # https://snacky.tistory.com/9
      # host주소와 port number 선언
-    app.run(host='0.0.0.0', debug=True)  
+    app.run(host='0.0.0.0')  
     

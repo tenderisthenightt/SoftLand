@@ -2,11 +2,11 @@
 
 import random
 
-anchor = {'candy':["static/img/similarity/anchor/candy.jpg", '/static/1/img/anchor/candy.jpg', 0.35],\
-    'table':["static/img/similarity/anchor/table.jpg", "/static/1/img/anchor/table.jpg", 0.42],\
-        'chair':["static/img/similarity/anchor/chair.jpg", "/static/1/img/anchor/chair.jpg", 0.32],\
-            'stick':["static/img/similarity/anchor/stick.jpg", "/static/1/img/anchor/stick.jpg", 0.4],\
-                'fan':["static/img/similarity/anchor/fan.png", "/static/1/img/anchor/fan.png", 0.33]}
+anchor = {'candy':["static/1/img/anchor/candy.jpg", '/static/1/img/anchor/candy.jpg', 0.35],\
+    'table':["static/1/img/anchor/table.jpg", "/static/1/img/anchor/table.jpg", 0.42],\
+        'chair':["static/1/img/anchor/chair.jpg", "/static/1/img/anchor/chair.jpg", 0.32],\
+            'stick':["static/1/img/anchor/stick.jpg", "/static/1/img/anchor/stick.jpg", 0.4],\
+                'fan':["static/1/img/anchor/fan.png", "/static/1/img/anchor/fan.png", 0.33]}
 quiz = ['candy', 'table', 'chair', 'stick', 'fan']
 
 def random_sim():

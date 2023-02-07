@@ -193,13 +193,15 @@
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
+              <!--audio-->
+              <audio controls autoplay
+              src="{{ url_for('static', filename = 'audio/web_board.wav') }}" 
+              type="audio/mpeg">브라우저가 audio 태그를 지원하지 않을 때 표시되는 문장</audio>
 
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
+                  <li><a href="/" onClick="window.location.href='/'"><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a></li>
+                  </li>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profile</a></li>
                     <li>
