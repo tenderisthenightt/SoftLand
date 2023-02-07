@@ -102,47 +102,38 @@
     let index = 0;
     const correctAnswers = ['빨강', '파랑', '노랑', '빨강', '파랑', '검정', '노랑', '빨강', '검정'];
 
-
-
-
-    function downloadCSV(csv, filename) {
-      let csvFile;
-      let downloadLink;
-      csvFile = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8;" });
-      downloadLink = document.createElement("a");
-      downloadLink.download = filename;
-      downloadLink.href = window.URL.createObjectURL(csvFile);
-      downloadLink.style.display = "none";
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-    }
-
-    document.getElementById('submit').addEventListener('click', function () {
+    document.getElementById('submit').addEventListener('click', function () { // submit을 클리하면 함수 실행
       let value = document.getElementById('input').value;
-      let filename = `2_img/${(index + 1).toString().padStart(3, '0')}.png`;
+      let filename = `1/${(index + 1).toString().padStart(3, '0')}.png`;
 
-      content += `${(Date.now() - prevTime) / 1000},${filename},${correctAnswers[index]},${value},${value == correctAnswers[index] ? '정답' : '오답'}\n`;
+      content += `${(Date.now() - prevTime)/1000},${filename},${correctAnswers[index]},${value},${value == correctAnswers[index] ? '정답' : '오답'}\n`; 
+      //content +    반응시간                        파일 이름   정답                      입력      정오          
       document.getElementById('input').value = '';
       prevTime = Date.now();
       index++;
 
-      if (index >= correctAnswers.length) {
-        downloadCSV(content, 'result.csv');
-        return;
-      }
-      document.getElementById('image').src = `static/2/img/${(index + 1).toString().padStart(3, '0')}.png`;
-    })
+      //지영
+      content = `${correctAnswers[index]},${value},${value == correctAnswers[index] ? '정답' : '오답'}`; // 위의 content 중에서 필요한 것 만 갖고와서 다시 변수만들기
+      let formData = new FormData(); // 새로운 변수 생성
+      formData.append("result", content); //변수에 저장
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST", "/stroop", true); // post 방식으로 / url ->stroop  보낸다.
+      xhr.send(formData); // formData 변수를 보낸다.
+      //지영끝
+   
 
-    var input = document.getElementById("input");
-        input.addEventListener("keyup", function (event) {
-        if (event.keyCode === 13) {
-          event.preventDefault();
-          document.getElementById("submit").click();
-        }
-    });
-    // 엔터 submit기능
+      document.getElementById('image').src = `static/img/1/${(index + 1).toString().padStart(3, '0')}.png`;
+  })
 
-  </script>
+var input = document.getElementById("input");
+input.addEventListener("keyup", function (event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    document.getElementById("submit").click();
+  }
+});
+// 엔터 submit기능 
+</script>
   <!--모델 끝-->
 
 
