@@ -26,7 +26,7 @@ const heightControls = document.querySelector('#jsHeight');
 // Variable
 
 // !! 사이즈 조절함
-let canvasWidth = 820;
+let canvasWidth = 800;
 let canvasHeight = 430;
 let isPainting = false;
 let isFilling = false;

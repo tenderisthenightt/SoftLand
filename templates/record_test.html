@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <button id="start-record">Start Record</button>
+    <button id="stop-record">Stop Record</button>
+    <button id="send-audio">Send Audio</button>
+<script>
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+    const mediaRecorder = new MediaRecorder(stream);
+    let chunks = [];
+
+    document.getElementById("start-record").addEventListener("click", function() {
+        mediaRecorder.start();
+        console.log(mediaRecorder.state);
+    });
+
+    document.getElementById("stop-record").addEventListener("click", function() {
+        mediaRecorder.stop();
+        console.log(mediaRecorder.state);
+    });
+
+    mediaRecorder.ondataavailable = function(e) {
+        chunks.push(e.data);
+    };
+
+    mediaRecorder.onstop = function(e) {
+        let blob = new Blob(chunks, { type: "audio/wav" });
+        chunks = [];
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:5000/upload", true);
+        xhr.send(blob);
+    };
+    });
+</script>
+
+</body>
+
+</html>
