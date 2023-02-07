@@ -10,6 +10,7 @@ import keras.models as kmodels
 import numpy as np
 import keras.utils as utils
 from anchor import *
+import PIL
 
 # 2nd test
 # 3rd test
@@ -72,11 +73,6 @@ def similarity_image():
     print(anch)
     return render_template('1st_test.html', h_path=h_path)
 
-# @app.route("/sim_test", methods=["POST"])
-# def sim_test():
-#     p_path = str(request.form['p_path'])
-#     sim = float(request.form['sim'])
-#     return render_template('sim_test.html', p_path=p_path, sim=sim)
 
 @app.route("/image_similarity", methods=["POST"])
 def image_similarity():
@@ -305,13 +301,6 @@ def end():
 def pygame():
     return render_template('5th_test.html')
 
-
-################### 6번째 게임 : STT ###################
-@app.route('/stt')
-def stt():
-    return render_template('6th_test.html')
-
-
 @app.route('/get_screenshot', methods=['POST'])
 def get_screenshot():
     
@@ -330,38 +319,47 @@ def get_screenshot():
             
         return level, score
 
-    # # 기억력 게임을 완료한 이후 easyocr을 이용해 게임결과 이미지에서 텍스트추출
-    # im = pyscreenshot.grab()
-    # random_id = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(32)])
-    # file_name = 'static/5/img/{}.png'.format(random_id)
-    # im.save(file_name)
-    # reader = easyocr.Reader(['ko', 'en'])
+    # 기억력 게임을 완료한 이후 easyocr을 이용해 게임결과 이미지에서 텍스트추출
+    im = pyscreenshot.grab()
+    random_id = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(32)])
+    file_name = 'static/5/img/{}.png'.format(random_id)
+    im.save(file_name)
+    reader = easyocr.Reader(['ko', 'en'])
     
-    # with open(file_name,'rb') as pf:
-    #     img = pf.read()
-    #     result = reader.readtext(img)
-    #     for res in result:
-    #         if res[1][0:10] == 'Your level':    
-    #             level = res[1][-1]
-    #             result = get_score(int(level))
+    with open(file_name,'rb') as pf:
+        img = pf.read()
+        result = reader.readtext(img)
+        for res in result:
+            if res[1][0:10] == 'Your level':    
+                level = res[1][-1]
+                result = get_score(int(level))
     
-    # # 텍스트로 추출한 결과를 DB에 저장
-    # conn = sql.connect('remember.db', isolation_level=None)
-    # cur = conn.cursor()
-    # cur.execute(
-    #     'CREATE TABLE IF NOT EXISTS remember (level TEXT, score TEXT)')
-    # cur.execute("""INSERT INTO remember(level, score) 
-    #                 VALUES(?, ?)""", (result[0], result[1]))
-    # conn.commit()
-    # cur.close()
+    # 텍스트로 추출한 결과를 DB에 저장
+    conn = sql.connect('ijm.db', isolation_level=None)
+    cur = conn.cursor()
+    cur.execute(
+        'CREATE TABLE IF NOT EXISTS ijm (level TEXT, score TEXT)')
+    cur.execute("""INSERT INTO remember(level, score) 
+                    VALUES(?, ?)""", (result[0], result[1]))
+    conn.commit()
+    cur.close()
                 
-    # os.remove(file_name)
+    os.remove(file_name)
     
 
-DATABASE_URI = 'sttdb.db'
-# ---- DB에서 데이터를 불러오기 ----
-conn = sql.connect(DATABASE_URI, isolation_level=None)
-cur = conn.cursor()
+
+################### 6번째 게임 : STT ###################
+@app.route('/stt')
+def stt():
+    return render_template('6th_test.html')
+
+
+
+
+# DATABASE_URI = 'ijm.db'
+# # ---- DB에서 데이터를 불러오기 ----
+# conn = sql.connect(DATABASE_URI, isolation_level=None)
+# cur = conn.cursor()
 # cur.execute(
 #     'CREATE TABLE IF NOT EXISTS STT (id TEXT, p TEXT, url TEXT)')
 # id = 1
@@ -504,7 +502,7 @@ cur = conn.cursor()
 #         return render_template('6th_test.html', target = sentence2, sound = sentence1, ck=String)
 
 
-################### 결과페이지 : 대시보드 ###################
+################## 결과페이지 : 대시보드 ###################
 
 @app.route('/result')
 def result():
