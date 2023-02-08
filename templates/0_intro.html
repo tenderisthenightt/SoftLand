@@ -20,18 +20,8 @@
         h1 {font-family: 'Times New Roman', Times, serif; padding: 7px;}
         li {font-weight: bolder; list-style: none; font-size : 15px}
         span {font-weight: lighter;}
-    </style>
-</head>
 
-<body>
-    <br>
-    <h1 align="center"> 경도 인지저하 테스트</h1>
-    <div id="image-container">
-        <img src="{{ url_for('static', filename = 'face/jieun.png')}}" alt="Image">
-        <div id="speech-bubble">
-          <p>Hello, I'm a chatbot.</p>
-        </div>
-        <style>
+   
           #image-container {
             position: fixed;
             bottom: 40px;
@@ -56,7 +46,21 @@
           #image-container:hover #speech-bubble {
             display: block;
           }
-        </style>
+      
+    </style>
+    
+</head>
+
+<body>
+
+    <br>
+    <h1 align="center"> 경도 인지저하 테스트</h1>
+    <div id="image-container">
+        <img src="{{ url_for('static', filename = 'face/jieun.png')}}" alt="Image">
+        <div id="speech-bubble">
+          <p>이제 긴장을 풀고 시작해볼까요?</p>
+        </div>
+      
       </div>
     <br>
         <div style="border: px solid; padding :10px; width: 800px; 
@@ -70,7 +74,7 @@
       ⏰ 10분정도 소요됩니다<br><br>
       👌 주의력, 집중력, 실행력, 기억력, 추상력, 지남력과 같은 인지기능을 평가합니다<br><br>
       💻 컴퓨터를 다루는데 서투른 경우에는 권장하지 않습니다<br><br>
-      👍 이제 긴장을 풀고 시작해볼까요?</p></div>
+      </div>
                         <!--모델 끝-->
       
         </div>
@@ -91,7 +95,7 @@
             <center>
                 <div style="border: 2px solid; padding :10px; height: 85px; width: 180px;
                     padding-top:7px; background-color:rgba(255, 255, 255, 0.455);">
-                    <p style="margin-top:1px;"> provided by<br> Team.인절미</p>
+                    <p style="margin-top:1px; margin-bottom: 10px; font-size:26px; ""> provided by<br> Team.인절미</p>
                 </div>
             </center>    
         </form>  

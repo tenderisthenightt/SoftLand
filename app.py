@@ -28,7 +28,7 @@ import urllib3
 import json
 import os, pyscreenshot, random, string
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
-# import easyocr
+import easyocr
 
 # 6st test
 
@@ -145,10 +145,58 @@ def image_similarity():
 
 
 ################### 2번째 게임 : 스트루프 ###################
-@app.route('/stroop')
+@app.route('/stroop') ## 여기에 들어가야하는거 넣어주세요~!!!1 지영
 def stroop():
     return render_template('2nd_test.html')
 
+@app.route("/save",methods=['POST']) #flask 웹 페이지 경로
+def save(): # 경로에서 실행될 기능 선언
+    correct = []
+    my_correct=[]
+    OX = []
+    result = request.form['result']
+    correct.append(result[0:2])  # 문자열 슬라이싱해서 들고와야한다. 
+    my_correct.append(result[3:5])
+    OX.append(result[6:8])
+    print(correct)
+    print(my_correct)
+    print(OX)
+    
+    # # 확인용
+    # check = request.form['check']
+    # print(check)
+    
+    # DB 생성 / 이미 있으면 나중에 주석처리하기.
+    # isolation_level = None (auto commit)
+    conn = sqlite3.connect('ijm.db', isolation_level=None)
+    # 커서
+    cursor = conn.cursor()
+    # 테이블 생성(데이터 타입 = TEST, NUMERIC, INTEGER, REAL, BLOB(image) 등)
+    # 필드명(ex. name) -> 데이터 타입(ex. text) 순서로 입력 
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS stroop (
+        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+        game text,
+        correct text,
+        my_correct text,
+        OX text)""")
+
+    # db 에 정보 저장
+    game = '스트루프'
+    correct = correct[0]
+    my_correct = my_correct[0]
+    OX = OX[0]
+    print('111111111')
+    cursor.execute("""
+        INSERT INTO stroop (game, correct,my_correct, OX) VALUES (?,?,?,?)          
+        """, (game, correct,my_correct, OX)
+        )
+    print('222222222')
+
+    conn.commit()
+    cursor.close()
+    conn.close()    
+    return render_template('2nd_test.html')
 
 ################### 3번째 게임 : 글->그림 ###################
 @app.route('/text_to_img')
@@ -197,7 +245,7 @@ def predict():
     #results.xyxy[0]  # 예측 (tensor)
     # results.pandas().xyxy[0]  # 예측 (pandas)
     conf = results.pandas().xyxy[0]
-
+    print(conf)
    
     # 오답 여부
     OX = []
@@ -376,15 +424,14 @@ def get_screenshot():
                 result = get_score(int(level))
     
     # 텍스트로 추출한 결과를 DB에 저장
-    conn = sql.connect('ijm.db', isolation_level=None)
-    cur = conn.cursor()
-    cur.execute(
-        'CREATE TABLE IF NOT EXISTS ijm (level TEXT, score TEXT)')
-    cur.execute("""INSERT INTO remember(level, score) 
+    conn = sqlite3.connect('ijm.db', isolation_level=None)
+    cursor = conn.cursor()
+    cursor.execute(
+        """CREATE TABLE IF NOT EXISTS remember (level TEXT, score TEXT)""")
+    cursor.execute("""INSERT INTO remember(level, score) 
                     VALUES(?, ?)""", (result[0], result[1]))
     conn.commit()
-    cur.close()
-                
+    cursor.close()
     os.remove(file_name)
     
 

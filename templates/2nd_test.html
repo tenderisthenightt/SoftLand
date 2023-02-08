@@ -35,51 +35,49 @@
     li {font-weight: bolder; list-style: none; font-size: 15px}
 
     span {font-weight: lighter;}
+
+      #image-container {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+      }
+      #image-container img {
+        width: 150px;
+        height: 150px;
+      }
+      #speech-bubble {
+        display: none;
+        position: absolute;
+        bottom: 140px;
+        right: 20px;
+        top: -115px;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      #image-container:hover #speech-bubble {
+        display: block;
+      }
+
     </style>
   </head>
 
 <body>
   <br>
-  <h1 align="center"> 스트루프 게임 </h1>
-  <h5><p style="text-align:center;">글자의 색깔이 무엇인지 입력해주세요</h5>
-  <br>
+  <h1 align="center"> 숫자 색 맞히기 </h1>
+  <h6>
+    <p style="text-align:center;">글자의 색깔이 무엇인지 입력해주세요<br> - 빨강 파랑 노랑 검정 - 
+  </h6>
+
   <div id="image-container">
     <img src="{{ url_for('static', filename = 'face/jungeun.png')}}" alt="Image">
     <div id="speech-bubble">
-      <p>Hello, I'm a chatbot.</p>
+      <p>스트루프 박사가 만든<br> 스트루프 이론에서<br> 비롯된 게임이야</p>
     </div>
+
   </div>
-  
-  <style>
-    #image-container {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      width: 200px;
-      height: 200px;
-      background: transparent;
-    }
-    #image-container img {
-      width: 150px;
-      height: 150px;
-      cursor: pointer;
-    }
-    #speech-bubble {
-      display: none;
-      position: absolute;
-      bottom: 180px;
-      right: 20px;
-      top: -105px;
-      background-color: #fff;
-      padding: 10px;
-      border-radius: 10px;
-      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    #image-container:hover #speech-bubble {
-      display: block;
-    }
-  </style>
   <div class="container">
     <div style="border: px solid; padding :10px; width: 820px; 
       height: 450px ; border-radius:2em; margin-left: -190px; overflow: hidden;
@@ -96,44 +94,71 @@
       <button id="submit" class="btn btn-primary" ;>제출</button>
     </div>
     </div>
-  <script>
-    let content = "반응 시간,파일 이름,정답,입력,정오\n";
-    let prevTime = Date.now();
-    let index = 0;
-    const correctAnswers = ['빨강', '파랑', '노랑', '빨강', '파랑', '검정', '노랑', '빨강', '검정'];
+    <script>
+      //let content = "반응 시간,파일 이름,정답,입력,정오\n";
+      let prevTime = Date.now();
+      let index = 0;
+      //const correctAnswers = ['1', '2', '3', '4', '5', '6', '7', '8', '9']; // 확인용
+      const correctAnswers = ['빨강', '파랑', '노랑', '빨강', '파랑', '검정', '노랑', '빨강', '검정'];
+      document.getElementById('submit').addEventListener('click', function () { // submit을 클리하면 함수 실행
+          let value = document.getElementById('input').value;
+          //let filename = `1/${(index + 1).toString().padStart(3, '0')}.png`;
 
-    document.getElementById('submit').addEventListener('click', function () { // submit을 클리하면 함수 실행
-      let value = document.getElementById('input').value;
-      let filename = `1/${(index + 1).toString().padStart(3, '0')}.png`;
+          //content += `${(Date.now() - prevTime)/1000},${filename},${correctAnswers[index]},${value},${value == correctAnswers[index] ? '정답' : '오답'}\n`; 
+          //content +    반응시간                        파일 이름   정답                      입력      정오          
+          document.getElementById('input').value = '';
+          prevTime = Date.now();
+          
 
-      content += `${(Date.now() - prevTime)/1000},${filename},${correctAnswers[index]},${value},${value == correctAnswers[index] ? '정답' : '오답'}\n`; 
-      //content +    반응시간                        파일 이름   정답                      입력      정오          
-      document.getElementById('input').value = '';
-      prevTime = Date.now();
-      index++;
+          //지영
+          content = `${correctAnswers[index]},${value},${value == correctAnswers[index] ? '정답' : '오답'}`; // 위의 content 중에서 필요한 것 만 갖고와서 다시 변수만들기
+          index++;//index content 뒤에 둬야 1씩추가됨.. 아니면 2번째부터 시작
+          let formData = new FormData(); // 새로운 변수 생성
+          formData.append("result", content); //변수에 저장
+          let check = new FormData(); // 새로운 변수 생성
+          check.append("check", correctAnswers); //변수에 저장
+          let xhr = new XMLHttpRequest();
+          xhr.open("POST", "/save", true); // post 방식으로 / url ->save  보낸다.
+          xhr.send(formData); // formData 변수를 보낸다.
+       
+          if (index >= correctAnswers.length) {
+            
+            return;
+        }
+      
+       
 
-      //지영
-      content = `${correctAnswers[index]},${value},${value == correctAnswers[index] ? '정답' : '오답'}`; // 위의 content 중에서 필요한 것 만 갖고와서 다시 변수만들기
-      let formData = new FormData(); // 새로운 변수 생성
-      formData.append("result", content); //변수에 저장
-      let xhr = new XMLHttpRequest();
-      xhr.open("POST", "/stroop", true); // post 방식으로 / url ->stroop  보낸다.
-      xhr.send(formData); // formData 변수를 보낸다.
-      //지영끝
-   
+          document.getElementById('image').src = `static/2/img/${(index + 1).toString().padStart(3, '0')}.png`;
+          // document.getElementById('image').src = `1/001.png`
+          // document.getElementById('image').src = `1/002.png`
+          // document.getElementById('image').src = `1/003.png`
+          // document.getElementById('image').src = `1/004.png`
+          // document.getElementById('image').src = `1/005.png`
+          // document.getElementById('image').src = `1/006.png`
+          // document.getElementById('image').src = `1/007.png`
+          // document.getElementById('image').src = `1/008.png`
+          // document.getElementById('image').src = `1/009.png`;
 
-      document.getElementById('image').src = `static/img/1/${(index + 1).toString().padStart(3, '0')}.png`;
-  })
-
-var input = document.getElementById("input");
-input.addEventListener("keyup", function (event) {
-  if (event.keyCode === 13) {
-    event.preventDefault();
-    document.getElementById("submit").click();
-  }
-});
-// 엔터 submit기능 
-</script>
+          // document.getElementById('image').src = `static/img/1/001.png`;
+          // document.getElementById('image').src = `static/img/1/002.png`;
+          // document.getElementById('image').src = `static/img/1/003.png`;
+          // document.getElementById('image').src = `static/img/1/004.png`;
+          // document.getElementById('image').src = `static/img/1/005.png`;
+          // document.getElementById('image').src = `static/img/1/006.png`;
+          // document.getElementById('image').src = `static/img/1/007.png`;
+          // document.getElementById('image').src = `static/img/1/008.png`;
+          // document.getElementById('image').src = `static/img/1/009.png`;
+      })
+    
+    var input = document.getElementById("input");
+    input.addEventListener("keyup", function (event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("submit").click();
+      }
+  });
+  // 엔터 submit기능 
+  </script>
   <!--모델 끝-->
 
 
@@ -155,7 +180,7 @@ input.addEventListener("keyup", function (event) {
     <center>
       <div style="border: 2px solid; padding :10px; height: 85px; width: 200px;
                     padding-top:7px; background-color:rgba(255, 255, 255, 0.455);">
-        <p style="margin-top:1px;"> provided by<br> Team.인절미</p>
+        <p style="margin-top:1px;  font-size:26px; "> provided by<br> Team.인절미</p>
       </div>
     </center>
   </form>

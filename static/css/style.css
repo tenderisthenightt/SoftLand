@@ -943,11 +943,12 @@ section {
 .hero-section .iphone-wrap .phone-2,
 .hero-section .iphone-wrap .phone-1 {
   position: absolute;
-  top: -50%;
+  top: 100px;
+  right: 100px;
+  width: 250px;
   overflow: hidden;
-  left: 0;
-  box-shadow: 0 15px 50px 0 rgba(0, 0, 0, 0.3);
-  border-radius: 30px;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 @media screen and (max-width: 992px) {
