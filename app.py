@@ -104,7 +104,7 @@ def image_similarity():
     print('44444444444444')
     cosine_similarity = np.dot(features1, features2) / (np.linalg.norm(features1) * np.linalg.norm(features2))
     print(cosine_similarity)
-   
+    print(sim)
    
     # db 저장하기
     OX = []
@@ -141,11 +141,11 @@ def image_similarity():
     conn.commit()
     cursor.close()
     conn.close()    
-    return render_template('1st_test.html')
+    return render_template('2nd_test.html')
 
 
 ################### 2번째 게임 : 스트루프 ###################
-@app.route('/stroop') ## 여기에 들어가야하는거 넣어주세요~!!!1 지영
+@app.route('/stroop', methods=['GET', 'POST']) ## 여기에 들어가야하는거 넣어주세요~!!!1 지영
 def stroop():
     return render_template('2nd_test.html')
 

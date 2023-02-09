@@ -123,6 +123,11 @@
           let xhr = new XMLHttpRequest();
           xhr.open("POST", "/predict", true);
           xhr.send(formData);
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+              window.location.href = "/wrong_img";
+            }
+          };
       });
   
       function dataURLToBlob(dataURL) {

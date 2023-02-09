@@ -178,7 +178,13 @@
       let xhr = new XMLHttpRequest();
       xhr.open("POST", "/image_similarity", true);
       xhr.send(formData);
-    });
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          window.location.href = "/stroop";
+        }
+      };
+    }
+    );
 
     function dataURLToBlob(dataURL) {
       let parts = dataURL.split(";base64,");
