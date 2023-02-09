@@ -1,45 +1,31 @@
-<!DOCTYPE html>
-<html>
-
-<body>
-    <button id="start-record" onclick="startRecording()" >Start Record</button>
-    <button id="stop-record" onclick="stopRecording()" >Stop Record</button>
-    <p>{{message}}</p>
+<button id="startRecording">Start Recording</button>
+<button id="stopRecording">Stop Recording</button>
 <script>
-   // Start recording the audio
-    const startRecording = () => {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        mediaRecorder = new MediaRecorder(stream);
+    const startRecording = document.getElementById("startRecording");
+    const stopRecording = document.getElementById("stopRecording");
 
-        const audioChunks = [];
-        mediaRecorder.addEventListener("dataavailable", event => {
-            audioChunks.push(event.data);
-        });
+    let audioChunks = [];
+    let mediaRecorder;
 
-        mediaRecorder.start();
-    };
+    startRecording.addEventListener("click", function () {
+        navigator.mediaDevices
+            .getUserMedia({ audio: true })
+            .then(function (stream) {
+                mediaRecorder = new MediaRecorder(stream);
+                mediaRecorder.start();
+                mediaRecorder.addEventListener("dataavailable", function (event) {
+                    audioChunks.push(event.data);
+                });
+            });
+    });
 
-    // Stop recording the audio and send it to the server
-    const stopRecording = async () => {
+    stopRecording.addEventListener("click", function () {
         mediaRecorder.stop();
-        const audioBlob = new Blob(audioChunks);
-        const audioFile = new File([audioBlob], "recorded-audio.wav", {
-            type: "audio/wav"
-        });
-
+        const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
         const formData = new FormData();
-        formData.append("audio", audioFile);
-
-        const response = await fetch("http://localhost:5000/upload", {
-            method: "POST",
-            body: formData
-        });
-
-        const data = await response.json();
-        console.log(data);
-    };
+        formData.append("audio", audioBlob);
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/send-audio", true);
+        xhr.send(formData);
+    });
 </script>
-
-</body>
-
-</html>

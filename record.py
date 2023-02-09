@@ -1,16 +1,22 @@
 from flask import Flask, request, render_template
-
+import base64
 app = Flask(__name__)
+
 @app.route('/')
-def record():
+def recorder():
     return render_template('record_test.html')
 
-@app.route("/upload", methods=["POST"])
-def upload():
+@app.route("/send-audio", methods=["POST"])
+def send_audio():
     audio = request.files["audio"]
-    audio.save("recorded-audio.wav")
-    message = "Audio file uploaded successfully"
+    data = audio.read()
+    audioContents = base64.b64encode(data).decode("utf8")
+    print(audioContents)
+    # Do something with the audio data
+    message = 'success'
     return render_template('record_test.html', message = message)
 
 if __name__ == "__main__":
     app.run()
+
+

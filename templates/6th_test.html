@@ -19,7 +19,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/styles.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/custom-responsive-styles.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/custom-responsive-styles.css') }}"
+        type="text/css">
 
 
     <!--TTS-->
@@ -32,7 +33,9 @@
 <body>
     <br>
     <h1 align="center"> 문장 따라 말하기 </h1>
-    <h5><p style="text-align:center;">제시되는 문장을 따라 말하고 제출해주세요</p></h5>
+    <h5>
+        <p style="text-align:center;">제시되는 문장을 따라 말하고 제출해주세요</p>
+    </h5>
     <br>
     <div class="container">
         <div style="border: px solid; padding :10px; width: 820px; 
@@ -41,39 +44,39 @@
 
             <div id=baijing>
                 <div id='sound_head'>
-                    <audio autoplay></audio> <!-- 시작버튼 -->
+                    <audio id='jsrecode' autoplay></audio> <!-- 시작버튼 -->
                     <div class='line'>
-                        <input class="btn" onclick="startRecording()" type="button" value="시작" />
+                        <input id='start' class="btn" onclick="startRecording()" type="submit" value="시작" />
                     </div>
                     <div class='line'>
-                            <!-- 멈추기버튼 -->
-                            <!-- <button class="btn" id="dw" type = 'submit' value="멈춰">멈춰</button> -->
-                            <!-- <input class="btn" onclick="stopRecording()" id='dw' type="submit" value="멈춰" /> -->
-                            <input class="btn" id='dw' type="submit" value="멈춰" />
+                        <!-- <form action="/STT" method="post"> -->
+                        <!-- 멈추기버튼 -->
+                        <input class="btn" onclick="stopRecording()" id='dw' type="submit" value="멈춰" />
+                        <!-- </form> -->
                     </div>
                 </div>
                 <div id='contens'>
                     <div class='qu'>
-                            <input id="code_reddit" type="hidden" value="{{ target }}" autocomplete="off">
-                            <button class="btn" onclick="g_gout()">재생</button> <!-- 정답 읽어주는 재생버튼 -->
-                            <div class = 'line'></div>
+                        <input id="code_reddit" type="hidden" value="{{ target }}" autocomplete="off">
+                        <button class="btn" onclick="g_gout()">재생</button> <!-- 정답 읽어주는 재생버튼 -->
+                        <div class='line'></div>
                         <table border=0 class='target_align'>
                             <th>따라하기 : </td>
-                            <td> {{ target }}</td>
+                            <td>{{ target }}</td>
                         </table>
                     </div>
                     <div class='qu'>
                         <table border=0 class='target_align'>
-                            <!-- <div class='line'><input onclick="playRecording()" type="button" value="播放" /></div> -->
+                            <!--<div class='line'><input onclick="playRecording()" type="button" value="播放" /></div> -->
                             <th>인식결과 : </td>
-                            <td> {{ sound }}</td>
+                            <td>{{ sound }}</td>
                         </table>
                     </div>
                     <div id='result'>
-                        <p>{{ ck }}</p>
+                        <td>{{ ck }}</td>
                     </div>
                 </div>
-                <!-- <input onclick="uploadAudio()" type="button" value="提交" /> -->
+                <!--<input onclick="uploadAudio()" type="button" value="提交" />-->
                 <div id="recordingslist"></div>
             </div>
 
@@ -94,70 +97,94 @@
                         sampleBits: 16,
                         sampleRate: 16000
                     });
+
+                    /*document.getElementById("start").addEventListener("click", function() {
+                        //let canvas = document.getElementById("jsrecode");
+                        let dataURL = recorder.toDataURL();
+                        let blob = dataURLToBlob(dataURL);
+                        let formData = new FormData();
+                        formData.append("recode", blob);
+                        let xhr = new XMLHttpRequest();
+                        xhr.open("POST", "/STT", true);
+                        xhr.send(formData);
+                    });
+                  
+                    function dataURLToBlob(dataURL) {
+                        let parts = dataURL.split(";base64,");
+                        let contentType = parts[0].split(":")[1];
+                        let raw = window.atob(parts[1]);
+                        let rawLength = raw.length;
+                        let uInt8Array = new Uint8Array(rawLength);
+                        for (let i = 0; i < rawLength; ++i) {
+                            uInt8Array[i] = raw.charCodeAt(i);
+                        }
+                        return new Blob([uInt8Array], {type: contentType});
+                    }*/
                 }
 
                 //-------------------------------------------------------------------------------------
                 // 멈추기 버튼
+                function stopRecording(url) {
+                    /*//recorder.stop();
+                    var blob = recorder.getBlob();
+                    var url = URL.createObjectURL(blob);
+                    var div = document.createElement('div');
+                    var au = document.createElement('audio');
+                    var hf = document.createElement('a');
+
+                    au.controls = true;
+                    au.src = url;
+                    hf.href = url;
+
+                    count = count + 1
+                    hf.download = '정답' + String(count) + '.wav';
+                    hf.innerHTML = hf.download;
+                    hf.click()
+
+                    //hf.click();            // 다운로드 클릭
+                    //a = div.appendChild(au);
+                    //div.appendChild(hf);
+                    recordingslist.appendChild(div);*/
 
 
-                // document.getElementById("move-btn").addEventListener("click", function() {
-                //     let canvas = document.getElementById("jsCanvas");
-                //     let dataURL = canvas.toDataURL();
-                //     let blob = dataURLToBlob(dataURL);
-                //     let formData = new FormData();
-                //     formData.append("image", blob, "image.png");
-                //     let xhr = new XMLHttpRequest();
-                //     xhr.open("POST", "/STT", true);
-                //     xhr.send(formData);
-                // });
-                document.getElementById("dw").addEventListener("click", function() {
-                    let dataURL = recorder.toDataURL();
-                    let blob = dataURLToBlob(dataURL);
-                    let formData = new FormData();
-                    formData.append("record", blob, "record.wav");
-                    let xhr = new XMLHttpRequest();
+                    //----------------
+
+                    var blob = recorder.getBlob();
+                    var url = URL.createObjectURL(blob);
+                    var fd = new FormData();
+                    fd.append("recode", blob, 'nefile');
+                    var xhr = new XMLHttpRequest();
                     xhr.open("POST", "/STT", true);
-                    xhr.send(formData);
-                });
-
-                function dataURLToBlob(dataURL) {
-                    let parts = dataURL.split(";base64,");
-                    let contentType = parts[0].split(":")[1];
-                    let raw = window.atob(parts[1]);
-                    let rawLength = raw.length;
-                    let uInt8Array = new Uint8Array(rawLength);
-                    for (let i = 0; i < rawLength; ++i) {
-                        uInt8Array[i] = raw.charCodeAt(i);
+                    // xhr.onload = function() {
+                    //     if (xhr.status === 200) {
+                    //     let response = JSON.parse(xhr.responseText);
+                    //     let text = response.text;
+                    //     // Display the extracted text
+                    //     document.getElementById("target").innerHTML = target;
+                    //     document.getElementById("sound").innerHTML = sound;
+                    //     document.getElementById("ck").innerHTML = ck;
+                    //     }
+                    // };
+                    xhr.send(fd);
+                    xhr.onreadystatechange = function() {
+                        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                            // Request was successful
+                            window.location = "/";
+                        }
+                    };
                     }
-                    return new Blob([uInt8Array], {type: contentType});
-                }
+                    
+
+                    // fetch("http://localhost:5000/STT", {
+                    //     method: "POST",
+                    //     body: fd
+                    // })
+                    // .then(response => response.text())
+                    // .then(text => {
+                    //     alert(text);
+                    // });
                 
-                
-
-                
-
-
-                // function stopRecording() {
-                //     //recorder.stop();
-                //     var blob = recorder.getBlob();
-                //     var url = URL.createObjectURL(blob);
-                //     var div = document.createElement('div');
-                //     var au = document.createElement('audio');
-                //     var hf = document.createElement('a');
-
-                //     au.controls = true;
-                //     au.src = url;
-                //     hf.href = url;
-
-                //     hf.download = '정답' + String(count) + '.wav';
-                //     hf.innerHTML = hf.download;
-                //     hf.click()
-
-                //     //hf.click();            // 다운로드 클릭
-                //     //a = div.appendChild(au);
-                //     //div.appendChild(hf);
-                //     recordingslist.appendChild(div);
-                // }
+                //
                 //-------------------------------------------------------------------------------------            
                 function playRecording() {
                     recorder.play(audio);
@@ -298,4 +325,5 @@
 
 
 </body>
+
 </html>
