@@ -505,7 +505,7 @@ def STT():
         print(String)
         #                                             정답문장          TTS        체크 결과
     # return render_template('6th_test.html', target = sentence2, sound = sentence1, ck=String)
-    return None
+    return jsonify({'sound':sentence2})
 
 
 

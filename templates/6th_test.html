@@ -43,39 +43,42 @@
         padding-top:50px; background-color:rgb(255, 255, 255) ">
 
             <div id=baijing>
-                <div id='sound_head'>
-                    <audio id='jsrecode' autoplay></audio> <!-- 시작버튼 -->
-                    <div class='line'>
-                        <input id='start' class="btn" onclick="startRecording()" type="submit" value="시작" />
-                    </div>
-                    <div class='line'>
-                        <!-- <form action="/STT" method="post"> -->
-                        <!-- 멈추기버튼 -->
-                        <input class="btn" onclick="stopRecording()" id='dw' type="submit" value="멈춰" />
-                        <!-- </form> -->
-                    </div>
-                </div>
+                <br><br><br>
                 <div id='contens'>
                     <div class='qu'>
                         <input id="code_reddit" type="hidden" value="{{ target }}" autocomplete="off">
-                        <button class="btn" onclick="g_gout()">재생</button> <!-- 정답 읽어주는 재생버튼 -->
+                        <!-- <button class="btn" onclick="g_gout()">재생</button>  -->
                         <div class='line'></div>
-                        <table border=0 class='target_align'>
-                            <th>따라하기 : </td>
-                            <td>{{ target }}</td>
-                        </table>
+                        <!-- <table border=0 class='target_align'> -->
+                            <!-- <th>따라하기 : </td> -->
+                            <h3>{{ target }}</h3>
+                        <!-- </table> -->
                     </div>
-                    <div class='qu'>
-                        <table border=0 class='target_align'>
+                     <!-- <div class='qu'>
+                        <table border=0 class='target_align'> -->
                             <!--<div class='line'><input onclick="playRecording()" type="button" value="播放" /></div> -->
-                            <th>인식결과 : </td>
+                            <!-- <th>인식결과 : </td>
                             <td>{{ sound }}</td>
                         </table>
                     </div>
                     <div id='result'>
                         <td>{{ ck }}</td>
+                    </div> -->
+                </div>
+                <br><br>
+                <div id='sound_head'>
+                    <audio id='jsrecode' autoplay></audio> <!-- 시작버튼 -->
+                    <div class='line'>
+                        <input id='start' class="btn" onclick="startRecording()" type="submit" value="따라말하기" />
+                    </div>
+                    <div class='line'>
+                        <!-- <form action="/STT" method="post"> -->
+                        <!-- 멈추기버튼 -->
+                        <input class="btn" onclick="stopRecording()" id='dw' type="submit" value="제출하기" />
+                        <!-- </form> -->
                     </div>
                 </div>
+                
                 <!--<input onclick="uploadAudio()" type="button" value="提交" />-->
                 <div id="recordingslist"></div>
             </div>
@@ -166,12 +169,12 @@
                     //     }
                     // };
                     xhr.send(fd);
-                    xhr.onreadystatechange = function() {
-                        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                            // Request was successful
-                            window.location = "/";
-                        }
-                    };
+                    // xhr.onreadystatechange = function() {
+                    //     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                    //         // Request was successful
+                    //         window.location = "/";
+                    //     }
+                    // };
                     }
                     
 
@@ -271,7 +274,7 @@
         <div>
             <center>
                 <br>
-                <input type="button" value="모두 제출하기" style="
+                <input type="button" value="결과보러가기" style="
                 width: 180px; height:100; padding-top:12px; padding-bottom:12px;
                 border-radius:15px; cursor : pointer ;  font-size:19px; 
                 font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
